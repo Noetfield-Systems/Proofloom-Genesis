@@ -9,8 +9,8 @@ Proofloom is a separate venture. Never merge its users, assets, database, token 
 ## Execution order
 Inspect reality → implement simplest truthful user journey → test it → verify persistence and effects → ship → recruit genuine users → iterate. Do not substitute a plan, a mockup or unverified numbers for working code. Avoid creating parallel Company OS, agent registry or verification engines.
 
-## Latest verified implementation (v0.2)
-Railway Web and PostgreSQL production Online, authenticated contribution and self-service account lifecycle, bridge event queue and independently keyed verifier endpoint, 16 local tests and full rollback-cleaned E2E PASS. This is an API-level bridge, NOT an autonomous GitHub coding system. GitHub repo and funded payment processing remain unconnected.
+## Latest verified implementation (v0.3)
+GitHub source `Noetfield-Systems/Proofloom-Genesis` and Railway `proofloom-global-web` production Online SUCCESS, backed by the existing isolated PostgreSQL. Ten selectable languages (English plus nine complete 354-key dictionaries), RTL for Persian and Arabic, persistent locale switching, 45 local tests, 60/60 live page-language HTTP checks, and application/database smoke HTTP 200. Prior contribution/account E2E passed with synthetic cleanup. This is an API-level agent bridge, NOT an autonomous GitHub coding system: GitHub App and paid funding remain disconnected.
 
 ## Current state vs goal
 Existing: registration, real quests, submission, operator review, XP after approval, proof pages, referral attribution, public status and sponsor inquiry. Planned: GitHub app, AI execution, WorkPackets, release reconciliation, funded bounties, EVM claims. Do not mark a planned step as completed.

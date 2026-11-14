@@ -8,8 +8,10 @@ Persisted `bridge_events`, WorkPacket lifecycle, server-to-server agent and inde
 
 **Verified:** 16/16 local checks, production smoke HTTP 200, full temporary account-to-approval E2E HTTP 200 (all synthetic users removed), unauthenticated callback 401, temporary E2E endpoint disabled 404, latest Web+DB Online SUCCESS.
 
-## P1.1 GitHub implementation — NOT DONE
-Create `Noetfield-Systems/Proofloom` repository, push this source, enable CI, install GitHub App with explicit repo permission, configure `BRIDGE_REPOSITORY` and an authorized agent runner. Demonstrate one real accepted submission → GitHub issue → scoped PR → passing checks → code merge → independently verified deployment → contributor revalidation. No repo or PR should be claimed without GitHub URLs and immutable IDs.
+## P1.1 GitHub source deployment + multilingual front end — COMPLETED; agent PR integration — NOT DONE
+The `Noetfield-Systems/Proofloom-Genesis` repository is populated and its `main` branch deploys to the live `proofloom-global-web` Railway service. Ten locales are selectable (English and nine translated). 354 fixed translated strings per non-English language, correct RTL direction and 60 passed live page-language checks. 45 local tests passed. GitHub Actions workflow is committed, but no claim is made about its execution results until observed.
+
+**Remaining:** Install GitHub App with explicit repository permission, authorize a bounded agent runner, and prove one real accepted submission → GitHub issue → scoped PR → passing checks → merge → independently verified deployment → contributor revalidation. `BRIDGE_ENABLED` remains false; no production PR execution is claimed.
 
 ## P1.2 Usability / identity hardening — NOT DONE
 Email confirmation and password recovery, external browser tests (mobile and keyboard), screenshot review, login recovery, moderation and impersonation controls, separate tenant-scoped GitHub keys, notifications, anti-abuse reviews.

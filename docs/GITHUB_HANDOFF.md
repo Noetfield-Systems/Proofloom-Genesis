@@ -1,19 +1,15 @@
-# GitHub repository handoff and CI
+# Proofloom GitHub source, CI and next integration
 
-**Intended GitHub repository:** `Noetfield-Systems/Proofloom` (private or public at Founder choice).
+**Live GitHub repository:** https://github.com/Noetfield-Systems/Proofloom-Genesis — `main` branch. The repository is populated with complete application source, Dockerfile, database migrations, localization dictionaries, tests, and `.github/workflows/ci.yml`.
 
-As of 2026-11-14, the repository was verified **not to exist** via the connected GitHub repository lookup. The available GitHub connector has file/commit/PR write operations but does not expose repository creation. No code push is claimed.
+**Railway source-linked deployment:** `proofloom-global-web` in the existing `proofloom` Railway project. Pushing to `main` triggers a Docker build and deploy. Last verified source-linked release: ten-language v0.3. The original Railway Function `proofloom-web` is preserved as a fallback; both use the same existing PostgreSQL service, not duplicate databases.
 
-The ready-to-upload source is included in the package under `proofloom/`. To publish to a new private repo from a machine with GitHub CLI rights:
+**Continuous integration:** the GitHub Actions workflow exists in the repository and runs Node source/contract tests on push and pull requests. Separately verify the actual GitHub Actions result; a successful Railway build is not proof of a successful Actions workflow. The latest source was locally tested 45/45, then the Railway deploy and live 60-locale smoke passed.
 
-```bash
-gh repo create Noetfield-Systems/Proofloom --private --source=. --remote=origin --push
-```
+## Remaining agent source integration (not done)
 
-Alternatively create the empty repo in the GitHub web UI and push with regular `git init`, `git add`, `git commit`, `git remote add origin`, `git push -u origin main`.
+Install an authorized GitHub App for this one repository, map the installation to a permitted Proofloom tenant/project, and authorize a bounded runner. Preserve branch protection, review policies, and the independent verifier. The `BRIDGE_REPOSITORY` variable identifies a repository but is **not** by itself an authorization grant. `BRIDGE_ENABLED=false` until a real runner is connected and checked.
 
-The included `.github/workflows/ci.yml` runs all source/bridge tests on every push and PR. Once a repo exists, connect the existing Railway Function or migrate to a GitHub-sourced Bun service. The current live Function remains authoritative until the new deployment is verified; don't create duplicate production databases.
+Prove: accepted user submission → persisted WorkPacket → assigned execution → GitHub issue/PR → tests → merge → independently verified release → original user revalidation. No completed PR/release or financial result should be claimed until independently evidenced.
 
-For a GitHub App, install it on the single intended repository. Map the installation to an explicitly authorized Proofloom project. Only then set `BRIDGE_REPOSITORY`, store the server-side app credentials, enable bounded worker leasing, and demonstrate the first real PR with checks.
-
-Never push `DATABASE_URL`, reviewer/bridge/verifier keys, customer data, or production volume snapshots.
+Never commit DATABASE_URL, reviewer/bridge/verifier secrets, user data, or production DB snapshots.
