@@ -3,7 +3,7 @@ import { Hono } from 'hono@4';
 import { getCookie, setCookie, deleteCookie } from 'hono/cookie';
 import postgres from 'postgres@3';
 import { createHash, timingSafeEqual } from 'node:crypto';
-import { localizeHtml, selectLocale } from './i18n';
+import { localizeHtml, localizePlain, selectLocale } from './i18n';
 
 const app = new Hono();
 const sql = postgres(Bun.env.DATABASE_URL || 'postgres://unconfigured', {max:5,connect_timeout:7,ssl:false});
@@ -100,6 +100,11 @@ app.use('*', async(c,next)=>{
   const adjusted=localizeHtml(original,chosen,request.pathname+request.search);
   const headers=new Headers(c.res.headers);headers.set('Content-Type','text/html; charset=UTF-8');headers.set('Vary','Accept-Language, Cookie');headers.set('Cache-Control','private, no-store');
   c.res=new Response(adjusted,{status:c.res.status,headers});
+ } else if(type.includes('text/plain') && chosen !== 'en' && !c.req.path.startsWith('/api/')) {
+  // Translate short platform-owned validation errors; preserve status and never touch JSON or submitted content.
+  const original=await c.res.text();
+  const headers=new Headers(c.res.headers);headers.set('Content-Type','text/plain; charset=UTF-8');headers.set('Vary','Accept-Language, Cookie');
+  c.res=new Response(localizePlain(original,chosen),{status:c.res.status,headers});
  }
  if(explicit && chosen===selectLocale(explicit))setCookie(c,'proofloom_lang',chosen,{httpOnly:true,sameSite:'Lax',secure:new URL(c.req.url).protocol==='https:',path:'/',maxAge:31536000});
 });
@@ -317,5 +322,28 @@ try{let wrote=false;try{await sql.begin(async tx=>{const testId=crypto.randomUUI
 }catch(e:any){if(e.message!=='QA_ROLLBACK_EXPECTED')throw e;}dbCheck={pass:wrote,detail:'transaction_rolled_back'};
 }catch(e:any){dbCheck={pass:false,detail:e.message?.slice(0,100)||'error'};}
 const ok=checks.every(x=>x.status===200&&x.nonempty)&&dbCheck.pass;if(!ok)console.error('proofloom_smoke_failed',JSON.stringify({checks,dbCheck}));return c.json({status:ok?'pass':'fail',checks,db_write_rollback:dbCheck},ok?200:503)});
+
+// Read-only, no secrets or synthetic accounts: validates translated live HTML routes in every enabled locale.
+app.post('/__i18n_smoke',async c=>{
+ if(!await allowed(c,'i18n-smoke',6,3600))return c.json({status:'rate_limited'},429);
+ const cases=[];
+ for(const lang of ['en','fa','ar','es','fr','de','pt-BR','ru','zh-CN','hi'] as const){
+  for(const path of ['/','/missions','/join','/mission/q01','/privacy','/terms']){
+   const response=await app.request(new Request('https://proofloom.local'+path+'?lang='+lang));
+   const text=await response.text();
+   const dir=['fa','ar'].includes(lang)?'rtl':'ltr';
+   const localeOk=text.includes('<html lang="'+lang+'" dir="'+dir+'">');
+   const chooserOk=text.includes('value="'+lang+'" selected');
+   const map=translations[lang];
+   const marker=path==='/missions'?'Open missions.':path==='/mission/q01'?'Make the first minute clearer':path==='/privacy'?'Privacy notice.':path==='/terms'?'Participation terms.':path==='/join'?'Create your builder identity.':'Build it.';
+   const translated=lang==='en'?true:text.includes(map?.[marker]||'__missing_dictionary_marker__');
+   cases.push({lang,path,status:response.status,langTag:localeOk,selector:chooserOk,translated});
+  }
+ }
+ const failed=cases.filter(x=>x.status!==200||!x.langTag||!x.selector||!x.translated);
+ if(failed.length)console.error('i18n_smoke_failed',JSON.stringify(failed));
+ return c.json({status:failed.length?'fail':'pass',checked:cases.length,localeCount:10,failures:failed},failed.length?503:200);
+});
+
 app.notFound(c=>c.html(<Shell u={null} active=""><div class="subhero"><h2>Not found.</h2><a class="btn" href="/">Back to Proofloom ↗</a></div></Shell>,404));
 Bun.serve({port:Number(Bun.env.PORT||3000),fetch:app.fetch});

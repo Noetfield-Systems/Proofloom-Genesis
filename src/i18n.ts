@@ -68,3 +68,6 @@ export function localizeHtml(html: string, lang: Locale, currentPath: string): s
   }
   return tokens.join('');
 }
+
+/** Translate only exact platform-owned plain-text errors, not API JSON or user messages. */
+export function localizePlain(input:string,lang:Locale):string { return translations[lang]?.[input.trim()] || input; }

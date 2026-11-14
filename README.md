@@ -1,12 +1,16 @@
 # Proofloom — Build it. Prove it. Earn it.
 
-An **independent global human × AI builder contribution economy**. Genesis v0.2 is a functioning public beta, not a funded marketplace or issued token.
+An **independent global human × AI builder contribution economy**. Genesis v0.3 is a functioning public beta, not a funded marketplace or issued token.
 
-**Production:** https://proofloom-web-production.up.railway.app
+**Global production (GitHub-backed):** https://proofloom-global-web-production.up.railway.app
 
-**Railway project:** `proofloom` (`67125ea9-a04c-4cae-a589-dd04347fc876`). Web: `proofloom-web`, database: dedicated PostgreSQL with persistent volume.
+**Legacy production fallback:** https://proofloom-web-production.up.railway.app
 
-## Working v0.2 functionality
+**GitHub:** https://github.com/Noetfield-Systems/Proofloom-Genesis (main, auto-deployed to the new Railway service).
+
+**Railway project:** `proofloom` (`67125ea9-a04c-4cae-a589-dd04347fc876`). New GitHub-backed Web: `proofloom-global-web`, previous Function: `proofloom-web`, database: dedicated PostgreSQL with persistent volume.
+
+## Working v0.3 functionality
 
 - Responsive public pages: home, 12 real self-contained Genesis quests, Vibe Studio entry, Academy, Community, Rewards, Opportunities, Whitepaper, Sponsors, Privacy, Terms.
 - Email/password registration, durable sessions, authenticated profiles and evidence-backed mission submissions.
@@ -16,6 +20,10 @@ An **independent global human × AI builder contribution economy**. Genesis v0.2
 - Contributor-to-Agent Bridge: persisted event log and WorkPackets, bounded, authorized queue/lease/callback interfaces, independent verifier API and release feedback paths.
 - Self-service JSON account export, password-confirmed deletion and resubmission after requested changes.
 - Synthetic E2E test passed in production and cleaned up test accounts. QA endpoint is disabled by default and currently disabled in production.
+
+## Multilingual platform
+
+Language selector on every HTML page, cookie-persisted preference, shareable `?lang=...`, correct LTR/RTL. Literal, editorial translations are provided for English, Persian, Arabic, Spanish, French, German, Brazilian Portuguese, Russian, Simplified Chinese and Hindi, covering 12 missions and 354 platform-owned copy keys per non-English language. User-submitted data and technical identifiers are not machine-translated. See `docs/LOCALIZATION.md`.
 
 ## Live verification
 
@@ -50,6 +58,6 @@ The repository-ready package includes `.github/workflows/ci.yml` and two SQL mig
 
 ## Remaining external integration boundaries
 
-The intended GitHub repo `Noetfield-Systems/Proofloom` was not available and has **not** been created or pushed. The available GitHub connector doesn't expose repository creation. See `docs/GITHUB_HANDOFF.md` for exact handoff. GitHub App, paid bounty checkout, EVM issuance, genuine independent QA receipts and a real first shipped change remain separate, unverified work. Proofloom must not merge its user data, token liabilities or treasury into Noetfield, ARQANT, BuildRelay, WorkforceOS, SignalForge, Cairn or Earnloop.
+The GitHub repository `Noetfield-Systems/Proofloom-Genesis` is created and deployed as the source of `proofloom-global-web`. The separate GitHub App for contributor PRs is not yet integrated. GitHub App, paid bounty checkout, EVM issuance, genuine independent QA receipts and a real first shipped change remain separate, unverified work. Proofloom must not merge its user data, token liabilities or treasury into Noetfield, ARQANT, BuildRelay, WorkforceOS, SignalForge, Cairn or Earnloop.
 
 Start with [Bridge API v0.2](docs/BRIDGE_API_v0.2.md), [QA report](docs/QA_AND_ACCEPTANCE.md), and [Founder Mandate](docs/FOUNDER_MANDATE_v1.txt).
