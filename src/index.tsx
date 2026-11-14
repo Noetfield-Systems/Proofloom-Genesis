@@ -4,6 +4,7 @@ import { getCookie, setCookie, deleteCookie } from 'hono/cookie';
 import postgres from 'postgres@3';
 import { createHash, timingSafeEqual } from 'node:crypto';
 import { localizeHtml, localizePlain, selectLocale } from './i18n';
+import { translations } from './translations';
 
 const app = new Hono();
 const sql = postgres(Bun.env.DATABASE_URL || 'postgres://unconfigured', {max:5,connect_timeout:7,ssl:false});
