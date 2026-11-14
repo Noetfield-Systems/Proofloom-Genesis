@@ -335,13 +335,14 @@ app.post('/__i18n_smoke',async c=>{
    const dir=['fa','ar'].includes(lang)?'rtl':'ltr';
    const localeOk=text.includes('<html lang="'+lang+'" dir="'+dir+'">');
    const chooserOk=text.includes('value="'+lang+'" selected');
+   const noStaleLanguage=text.includes('name="return_to" value="'+path+'"');
    const map=translations[lang];
    const marker=path==='/missions'?'Open missions.':path==='/mission/q01'?'Make the first minute clearer':path==='/privacy'?'Privacy notice.':path==='/terms'?'Participation terms.':path==='/join'?'Create your builder identity.':'Build it.';
    const translated=lang==='en'?true:text.includes(map?.[marker]||'__missing_dictionary_marker__');
-   cases.push({lang,path,status:response.status,langTag:localeOk,selector:chooserOk,translated});
+   cases.push({lang,path,status:response.status,langTag:localeOk,selector:chooserOk,translated,cleanReturn:noStaleLanguage});
   }
  }
- const failed=cases.filter(x=>x.status!==200||!x.langTag||!x.selector||!x.translated);
+ const failed=cases.filter(x=>x.status!==200||!x.langTag||!x.selector||!x.translated||!x.cleanReturn);
  if(failed.length)console.error('i18n_smoke_failed',JSON.stringify(failed));
  return c.json({status:failed.length?'fail':'pass',checked:cases.length,localeCount:10,failures:failed},failed.length?503:200);
 });

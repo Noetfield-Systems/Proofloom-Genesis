@@ -43,6 +43,7 @@ test('Locale switching preserves cookie, right-to-left direction and translated 
  const src=readFileSync(new URL('../src/index.tsx',import.meta.url),'utf8');
  const core=readFileSync(new URL('../src/i18n.ts',import.meta.url),'utf8');
  assert.match(src,/proofloom_lang/);assert.match(src,/__i18n_smoke/);
+ assert.ok(src.includes("import { translations } from './translations';"));
  assert.match(core,/rtlLanguages/);assert.match(core,/localizePlain/);
  assert.match(core,/dir=/);assert.match(core,/language-select/);
 });

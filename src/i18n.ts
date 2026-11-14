@@ -47,7 +47,11 @@ export function localizeHtml(html: string, lang: Locale, currentPath: string): s
   // Internationalized page metadata + full RTL document flow; brand/URLs/inputs remain stable.
   const rtl = rtlLanguages.has(lang);
   html = html.replace(/<html\b[^>]*>/i, `<html lang="${lang}" dir="${rtl?'rtl':'ltr'}">`);
-  const returnTo = /^\/(?!\/)/.test(currentPath) ? currentPath : '/';
+  // A shared ?lang= URL must not override the newly selected language on redirect.
+  const safePath = /^\/(?!\/)/.test(currentPath) ? currentPath : '/';
+  const target = new URL(safePath, 'https://proofloom.local');
+  target.searchParams.delete('lang');
+  const returnTo = target.pathname + target.search;
   const languages = Object.entries(languageNames).filter(([code]) => locales.includes(code as Locale)).map(([code,label]) => `<option value="${code}" ${code===lang?'selected':''}>${htmlEscape(label)}</option>`).join('');
   const chooser = `<form class="language-select" action="/language" method="get"><input type="hidden" name="return_to" value="${htmlEscape(returnTo)}"><label class="sr-only" for="language-choice">Language</label><select id="language-choice" name="lang" aria-label="Language" onchange="this.form.submit()">${languages}</select><noscript><button type="submit">Apply</button></noscript></form>`;
   html = html.replace('<div class="auth">', chooser+'<div class="auth">');
