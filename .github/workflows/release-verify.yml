@@ -1,0 +1,27 @@
+name: Proofloom independent release evidence
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '3-58/5 * * * *'
+permissions:
+  contents: read
+  checks: read
+concurrency:
+  group: proofloom-release-verifier
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: vars.PROOFLOOM_BRIDGE_VERIFIER_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify merged GitHub artifacts and live production behavior
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          VERIFIER_API_KEY: ${{ secrets.PROOFLOOM_VERIFIER_API_KEY }}
+          PROOFLOOM_BASE_URL: https://proofloom-global-web-production.up.railway.app
+        run: node scripts/release-verifier.mjs
