@@ -1,0 +1,1405 @@
+# MASTER EXECUTION MANDATE
+## GLOBAL VIBE-TO-EARN & HUMAN × AI BUILDER ECONOMY
+**Version:** 1.0 — Founder-Authorized Product & Engineering Mandate  
+**Mission:** Design, Build, Integrate, Test, Launch & Grow  
+**Product Type:** Independent Global Web3 Platform  
+**Operating Model:** Community-Owned Participation + AI-Assisted Development + Verified Contribution Economy
+
+---
+
+# 0. YOUR ROLE & EXECUTION AUTHORITY
+
+You are acting as an autonomous founding product organization composed of:
+
+- CEO / Product Strategist
+- Web3 Economy Architect
+- Senior UX/UI Designer
+- Full-Stack Engineering Team
+- AI Agent Systems Architect
+- Developer Experience Engineer
+- Tokenomics & Smart Contract Engineer
+- Community & Growth Lead
+- Developer Education Lead
+- Freelance Marketplace Architect
+- Independent QA & Verification Engineer
+
+Your mission is to create a real, internationally accessible Web3-native platform in which humans and AI agents continuously collaborate to build, improve, test and launch software.
+
+**This is an implementation mission, not merely a planning exercise.**
+
+Research, make technical decisions, create the application, integrate functioning components, test complete user journeys, deploy where authorized access exists, and report verified outcomes.
+
+Do not substitute documentation, static mockups, fake dashboards or simulated users for working functionality.
+
+Do not invent unnecessary infrastructure, governance layers, approval gates or financial blockers.
+
+Preserve actual requirements concerning payment correctness, access control, data privacy, intellectual property and applicable laws.
+
+Start from the smallest genuinely functional product and evolve it toward the full platform.
+
+# 1. CORE VISION
+
+## Build it. Prove it. Earn it.
+
+Create the world's most accessible community-driven environment for building software with AI.
+
+People should be able to contribute regardless of whether they know how to code.
+
+They can:
+
+- Describe features through natural-language prompts.
+- Use AI to implement small improvements.
+- Test applications and report reproducible defects.
+- Suggest UX/UI improvements.
+- Create designs, prototypes or working components.
+- Review code and AI-generated changes.
+- Complete educational development challenges.
+- Join human–AI teams.
+- Build public proof-of-work portfolios.
+- Apply for paid freelance opportunities.
+- Earn reputation, XP, contribution rewards and eligible ecosystem tokens.
+- Participate in project development and community decisions.
+- Discover and, where available, trade the ecosystem token.
+
+The fundamental value proposition is:
+
+**A person can enter as a beginner, participate in a real product improvement, receive recognition for verified work, develop professional skills and eventually become a paid contributor.**
+
+Unlike ordinary coding tools, this is a collaborative contribution economy.
+
+Unlike conventional quest platforms, completed missions should produce real software improvements.
+
+Unlike freelance marketplaces, the system should progressively train and qualify new talent.
+
+Unlike ordinary Web3 token communities, participation should generate measurable product value.
+
+# 2. INDEPENDENT VENTURE — STRICT BOUNDARIES
+
+This platform is a new, independent global venture.
+
+Do not merge it into:
+
+- Noetfield
+- ARQANT
+- BuildRelay
+- WorkforceOS
+- SignalForge
+- Cairn
+- Earnloop
+
+It must have its own branding, application, community, product identity, economics, token design, accounting, permissions, database ownership and roadmap.
+
+However, it should support existing portfolio projects as optional first customers, sponsors, pilot projects and case studies.
+
+Its architecture must support two operating modes:
+
+**Mode A — Independent Platform:** External developers, organizations and communities can use the system without depending on the Founder’s existing infrastructure.
+
+**Mode B — Connected Portfolio:** Authorized project tenants connect their applications to existing Company OS / Agent Fabric / Runway / WorkforceOS services through adapters.
+
+Never merge tenant data, token liabilities, company ownership, user records or treasuries simply because systems are integrated.
+
+# 3. COMPETITIVE BENCHMARKS
+
+Research and extract proven mechanics from:
+
+| Platform | Mechanism to study |
+|---|---|
+| Zealy | Quests, XP, community campaigns, rankings |
+| Layer3 | Progressive Web3 discovery and achievements |
+| Superteam Earn | Bounties, freelance work, professional profiles |
+| OnlyDust | Verified open-source contributions and rewards |
+| DoraHacks | Builders, hackathons, projects, funding |
+| Gitcoin | Community funding and contribution coordination |
+| GitHub | Issues, pull requests, code review, contribution history |
+| Lovable | Natural-language application building |
+| Replit | Accessible AI-assisted development environments |
+| Bolt | Rapid prompt-to-app implementation |
+| Cursor | AI-assisted engineering workflows |
+| Talent Protocol | Portable professional reputation |
+
+Benchmark product capabilities, engagement loops, incentive structures, UX and business models.
+
+Do not copy proprietary design assets or source code.
+
+Produce a concise benchmark matrix, identify the strongest mechanics and incorporate them into an original product.
+
+# 4. TARGET USERS & PARTICIPATION LEVELS
+
+The platform must serve six primary groups.
+
+**1. Explorer / Beginner**
+
+No coding knowledge required.
+
+Can test applications, submit feedback, reproduce bugs, complete simple quests and learn prompt engineering.
+
+**2. Vibe Builder**
+
+Uses prompts and AI coding environments to propose features, generate interfaces, modify applications and create working prototypes.
+
+**3. Professional Builder**
+
+Can submit pull requests, implement technical features, review architecture, test software and deliver paid work.
+
+**4. Maintainer / Reviewer**
+
+Validates contributions, manages project backlogs, mentors beginners, reviews submissions and assesses technical quality.
+
+**5. Project Sponsor / Employer**
+
+Publishes a project, funds bounties, receives submissions, recruits contributors and connects its development processes.
+
+**6. Community / Token Participant**
+
+Joins the community, evaluates public projects, participates in eligible governance, supports ecosystem initiatives or accesses the token economy without being forced to write code.
+
+All groups must have meaningful user journeys.
+
+Do not require a cryptocurrency wallet for initial onboarding.
+
+# 5. PRIMARY PRODUCT LOOP
+
+The central experience must follow this lifecycle:
+
+**Discover → Join → Learn → Contribute → Verify → Improve → Reward → Build Reputation → Unlock More Opportunities → Repeat**
+
+Example:
+
+1. A new user signs up in seconds.
+2. The system recommends a beginner-friendly project.
+3. The user opens a quest.
+4. The quest displays an application preview and a clear objective.
+5. The user identifies a problem or suggests a feature.
+6. They submit a prompt, screenshot, reproduction steps or other evidence.
+7. AI evaluates, classifies and routes the submission.
+8. If the contribution is useful, the system creates or updates a development task.
+9. A human builder or AI agent works on the improvement.
+10. Tests and independent QA evaluate the implementation.
+11. An approved change is merged and deployed.
+12. The contributor receives a visible outcome and eligible rewards.
+13. The system invites the contributor to test the next iteration.
+
+This cycle must operate as a real, persisted workflow.
+
+Every participant should be able to see what happened to their contribution.
+
+# 6. THE VIBE CODING STUDIO
+
+Create an accessible, lightweight, premium coding environment.
+
+The interface should feel more like a collaborative AI-native creative studio than a traditional IDE.
+
+### Beginner Mode
+
+The user sees:
+
+- A live application preview.
+- A simple natural-language input.
+- Suggested feature improvements.
+- A screenshot and bug-report tool.
+- A clear submission button.
+- A visible progress and contribution status.
+
+Example:
+
+"I think this profile page would work better if users could compare their skills with available projects."
+
+The system translates the suggestion into a structured proposal.
+
+### Builder Mode
+
+Support:
+
+- Prompt-to-component generation.
+- Safe workspace preview.
+- Code diffs.
+- Iterative prompts.
+- Test execution.
+- GitHub pull requests.
+- AI-assisted debugging.
+- Feature branches.
+- Change descriptions.
+- Reviewer comments.
+
+### Professional Mode
+
+Support:
+
+- Linked GitHub repositories.
+- Existing issues.
+- Technical specifications.
+- Multiple files and modules.
+- Automated tests.
+- Pull request reviews.
+- Reusable components.
+- More advanced engineering tasks.
+
+Do not build an expensive browser IDE from scratch if a supported lightweight workspace or repository integration can deliver the same initial functionality.
+
+Use existing AI coding infrastructure where appropriate.
+
+Agent execution costs must be budgeted and visible, while ordinary feedback and initial participation remain low-friction.
+
+# 7. QUEST ENGINE
+
+Implement multiple quest categories.
+
+**Discovery Quests:** Explore applications and identify issues.
+
+**Feedback Quests:** Submit actionable product feedback.
+
+**Bug Hunter Quests:** Reproduce and document defects.
+
+**Vibe Coding Quests:** Use AI to propose or implement improvements.
+
+**Design Quests:** Improve screens, copy, navigation and UX.
+
+**Testing Quests:** Validate new releases.
+
+**Learning Quests:** Complete short educational challenges.
+
+**Community Quests:** Help other builders, answer questions and create useful tutorials.
+
+**Build Bounties:** Deliver scoped, funded technical work.
+
+**Collaborative Quests:** Multiple humans and agents cooperate on a shared objective.
+
+**Sponsored Quests:** External companies fund legitimate development missions.
+
+**Seasonal Quests:** Time-bounded community challenges with transparent participation rules.
+
+Each quest must include:
+
+- Objective and difficulty.
+- Expected deliverable.
+- Eligibility.
+- Project reference.
+- Deadline, if relevant.
+- Available reward types and funding status.
+- Evaluation rubric.
+- Proof requirements.
+- Submission and review states.
+- Potential next mission.
+
+Support repeatable daily and weekly missions where appropriate, but do not reward low-quality repetitive spam.
+
+# 8. CONTRIBUTION PROOF ENGINE
+
+This is one of the most important differentiators.
+
+Users must not receive economically significant rewards merely for submitting large numbers of prompts or clicking buttons.
+
+Recognize demonstrated contribution quality.
+
+Create a Contribution Proof system that considers:
+
+- Relevance to the actual task.
+- Quality and specificity.
+- Originality.
+- Reproducibility.
+- Functional correctness.
+- Tests and evidence.
+- Reviewer acceptance.
+- Measurable product impact.
+- Collaboration quality.
+- Continued usefulness after deployment.
+
+Use different evaluation rubrics for feedback, testing, design, code, documentation and mentoring.
+
+For example:
+
+A beginner who identifies a serious reproducible defect may deserve more recognition than a coder who submits ten unusable changes.
+
+A contributor who improves onboarding and increases verified activation may deserve greater impact credit than someone who makes a purely cosmetic change.
+
+Store durable evidence links.
+
+Create a public-facing **Proof of Contribution** record containing the permitted subset of:
+
+- Contributor identity.
+- Project.
+- Contribution category.
+- Submitted artifact.
+- Review decision.
+- Linked issue or pull request.
+- Tests and verification results.
+- Release reference.
+- Reward category.
+- Timestamp.
+
+Private project information must remain private.
+
+# 9. REWARD ECONOMY
+
+Design a multi-layer reward architecture.
+
+## Layer A — XP
+
+Immediate progression and gamification.
+
+XP is off-chain, nontransferable, and is not a financial claim.
+
+It unlocks missions, achievements, learning tracks and community levels.
+
+## Layer B — Contribution Reputation
+
+A persistent evidence-based professional score.
+
+Reputation should prioritize accepted work, reliability, quality and demonstrated skills.
+
+It must not be purchasable with tokens.
+
+## Layer C — Contribution Reward Allocation
+
+Qualifying work earns a recorded allocation under published reward-pool and review rules.
+
+The allocation must distinguish:
+
+- Pending review.
+- Accepted but not finalized.
+- Finalized entitlement, if applicable.
+- Claimed or paid.
+
+A future token distribution is not automatically equivalent to a present token balance.
+
+## Layer D — Ecosystem Token
+
+Design a transferable token providing meaningful ecosystem utility.
+
+Potential uses:
+
+- Eligible contributor rewards.
+- Access to optional ecosystem benefits.
+- Community governance participation.
+- Sponsored ecosystem programs.
+- Builder membership and advanced opportunities.
+- Project-related token incentives.
+- Ecosystem coordination.
+
+Do not make basic learning or participation dependent on token purchases.
+
+## Layer E — Real Money Bounties
+
+Support clearly funded USDC or other supported payments for professional work.
+
+Funds and promised payments must be tracked distinctly from XP and token rewards.
+
+A verified token balance is not the same as earned cash.
+
+# 10. TOKENOMICS & WHITEPAPER
+
+Develop an original token economy with a long-term contribution incentive model.
+
+Use the following as the initial economic hypothesis, then validate and stress-test it.
+
+**Provisional maximum supply: 1,000,000,000 tokens.**
+
+| Allocation | Share |
+|---|---:|
+| Community & verified contributor rewards | 45% |
+| Ecosystem development & sponsors | 15% |
+| Protocol treasury | 12% |
+| Liquidity and market development | 10% |
+| Core team & builders | 12% |
+| Strategic reserve | 6% |
+| **Total** | **100%** |
+
+This is a design baseline, not an authorized issuance, sale or fixed promise.
+
+Design appropriate vesting, treasury controls, emissions and transparency.
+
+### Reward Distribution
+
+Use a budget-limited epoch-based distribution model.
+
+For example:
+
+**Contributor Reward = Epoch Reward Pool × Qualified Contribution Weight / Total Qualified Contribution Weight**
+
+Actual contribution weights must be derived from accepted work and published evaluation rules.
+
+Prevent rewards from being generated infinitely by repeated low-value prompts.
+
+Reserve the ability to reward testers, reviewers, educators and maintainers—not just coders.
+
+Implement:
+
+- Season 0 / Genesis participation.
+- Season-based contributor campaigns.
+- Transparent reward pools.
+- Anti-Sybil checks.
+- Reward caps and diminishing returns for repetitive actions.
+- Quality-adjusted contribution points.
+- Referral rewards based on genuine activation.
+- Clear claim eligibility.
+- Treasury and emissions reporting.
+- Distribution and claim history.
+- Reward dispute process.
+
+### Token Lifecycle
+
+Design the lifecycle:
+
+**Genesis → Contribution Tracking → Verified Allocation → Token Distribution → Ecosystem Utility → Community Participation**
+
+Support wallet linking and token claims through a modular EVM-compatible architecture.
+
+Evaluate BNB Smart Chain and Base as low-fee deployment candidates; select based on actual integration requirements, costs and target community.
+
+Never reuse tokens, liabilities or treasuries from unrelated ventures.
+
+Support legitimate secondary-market participation where a real market exists.
+
+Do not represent an unlaunched token, simulated balance, future distribution or hypothetical liquidity as an existing tradable asset.
+
+Do not guarantee future token appreciation, redemption or exchange value.
+
+Design the sale, treasury, distribution and liquidity components separately so legitimate operations can activate without rebuilding the platform.
+
+### Whitepaper Deliverable
+
+Produce a public-quality whitepaper covering:
+
+1. Vision and market problem.
+2. Human–AI collaborative economy.
+3. Product and user roles.
+4. Contribution Proof model.
+5. Quest and reward mechanisms.
+6. AI execution architecture.
+7. Token utility.
+8. Supply, distribution and vesting.
+9. Economic sustainability.
+10. Treasury and liquidity design.
+11. Community governance.
+12. Talent and education ecosystem.
+13. Marketplace economics.
+14. Growth and network effects.
+15. Roadmap and milestones.
+16. Risks, limitations and factual project status.
+
+The whitepaper must match the actual product roadmap and implemented features.
+
+# 11. HUMAN-IN-THE-LOOP DEVELOPMENT ENGINE
+
+This is the core technical innovation.
+
+Create a closed-loop development system connecting community contributions to a continuously improving application.
+
+The canonical workflow is:
+
+**Community Input → Structured Feedback → AI Triage → Issue Clustering → Prioritization → WorkPacket → Agent/Human Execution → QA → Verification → Release → User Revalidation → Rewards**
+
+### Step 1 — Feedback Intake
+
+Accept structured or unstructured feedback.
+
+Examples:
+
+- "The login page crashes on mobile."
+- "Add a referral progress indicator."
+- "The dashboard feels confusing."
+- "This screen needs better contrast."
+- "I created a cleaner version using AI."
+
+Record context, project, application version, timestamps and supporting evidence.
+
+### Step 2 — AI Classification
+
+Classify feedback as:
+
+- Bug
+- Feature request
+- UX issue
+- Performance issue
+- Accessibility issue
+- Documentation issue
+- Security concern
+- Duplicate
+- Not actionable
+
+Store classification confidence and explanation.
+
+### Step 3 — Deduplication & Clustering
+
+Group equivalent or related reports without discarding distinct evidence.
+
+Aggregate signal:
+
+- Number of affected users.
+- Severity.
+- Reproducibility.
+- Frequency.
+- Affected feature.
+- Business importance.
+- Contributor evidence.
+
+### Step 4 — Prioritization
+
+Calculate a transparent priority recommendation using impact, urgency, feasibility, cost and product direction.
+
+Distinguish:
+
+- Fix now.
+- Include in next release.
+- Add to roadmap.
+- Request clarification.
+- Reject with explanation.
+
+### Step 5 — Agent OS Dispatch
+
+Convert accepted issues into structured execution WorkPackets.
+
+Each WorkPacket should include:
+
+- Tenant and project IDs.
+- Source feedback IDs.
+- Objective.
+- Scope.
+- Repository and permitted paths.
+- Acceptance criteria.
+- Execution budget.
+- Authorized tools.
+- Assigned agent or human.
+- Required tests.
+- Risk class.
+- Verification requirements.
+- Expected artifact.
+
+### Step 6 — AI / Human Execution
+
+For authorized projects, AI agents can:
+
+- Inspect the relevant code.
+- Propose an implementation.
+- Create isolated changes.
+- Run tests.
+- Open pull requests.
+- Produce previews.
+- Respond to review feedback.
+
+Humans can take over, collaborate or review.
+
+### Step 7 — Independent Verification
+
+Require proof of completed work.
+
+A completion claim is valid only when its evidence supports it.
+
+Distinguish:
+
+- Task created.
+- Agent dispatched.
+- Artifact generated.
+- Pull request opened.
+- Tests passed.
+- Change approved.
+- Code merged.
+- Deployment completed.
+- Production result verified.
+
+Safe, policy-authorized low-risk changes may proceed through automated merge and deployment.
+
+Changes affecting secrets, access privileges, payments, reward accounting or smart contracts require the applicable authorization and verification.
+
+### Step 8 — User Revalidation
+
+Notify the originating contributors when an improvement becomes testable.
+
+Ask them to verify whether the change solved the original problem.
+
+Accept additional feedback and reopen the work if needed.
+
+### Step 9 — Impact & Reward Attribution
+
+Associate the implemented improvement with its original contributors, builders, reviewers and testers.
+
+Calculate eligible recognition and rewards without paying duplicate or fraudulent claims.
+
+### Step 10 — Continuous Learning
+
+Use verified product feedback and outcome data to improve future prioritization.
+
+This learning must not silently modify foundational policies, permissions or economic rules.
+
+# 12. EXISTING AGENT OS INTEGRATION
+
+Build a modular integration layer.
+
+For internally authorized portfolio projects, discover and reuse existing services:
+
+**Sina Founder OS:** Founder-level goals, portfolio priorities and strategic decisions.
+
+**Company OS:** Company/project context, departments, mission management and operational state.
+
+**Agent Fabric / Paperclip:** Agent identities, assignments, collaboration and execution coordination.
+
+**NOETFIELD-RUNWAY / Motor:** Authorized coding, tooling and implementation execution.
+
+**Executive Governor:** Work authorization, policy and execution boundaries.
+
+**Independent Verifier:** Artifact validation, release evidence and receipts.
+
+**WorkforceOS:** Optional human/agent talent matching and assignment integration.
+
+Do not build replacement versions of these components when an approved integration already exists.
+
+Create a dedicated **Contributor-to-Agent Bridge** with versioned, authenticated APIs.
+
+Required events:
+
+- `contribution.submitted`
+- `feedback.classified`
+- `issue.clustered`
+- `proposal.accepted`
+- `workpacket.created`
+- `workpacket.dispatched`
+- `implementation.ready`
+- `pr.opened`
+- `qa.completed`
+- `release.verified`
+- `contribution.accepted`
+- `reward.finalized`
+- `reward.claimed`
+- `contributor.revalidation_completed`
+
+All events must support traceable IDs, retry handling and idempotency.
+
+External customers must be able to use the platform through generic project and repository adapters without adopting the Founder’s internal OS.
+
+# 13. FREELANCER & HIRING MARKETPLACE
+
+Build a direct path from learning and contribution to paid work.
+
+### Contributor Profiles
+
+Each public profile should show:
+
+- Skills and interests.
+- Portfolio.
+- Verified contributions.
+- Accepted pull requests.
+- Completed projects.
+- Reputation.
+- Reliability.
+- Specializations.
+- Languages.
+- Availability.
+- Preferred work types.
+- Optional wallet identity.
+
+### Hiring Features
+
+Support:
+
+- Paid bounties.
+- Freelance jobs.
+- Short-term contracts.
+- Team formation.
+- Mentorship opportunities.
+- Technical reviewer roles.
+- Human–AI collaborative assignments.
+- Project applications.
+- Employer shortlists.
+- Completion verification.
+
+### Hiring Workflow
+
+**Project Posts Opportunity → Qualified Contributors Apply → Sponsor Selects → Scope & Payment Terms Accepted → Work Delivered → QA → Approval → Payment → Reputation Update**
+
+The employer should see evidence of actual work rather than relying entirely on a self-reported résumé.
+
+Paid engagements require explicit scope, funding/payment conditions, dispute handling and approval criteria.
+
+For the initial release, reuse a supported payment provider or clearly scoped noncustodial settlement integration rather than constructing unnecessary financial infrastructure.
+
+# 14. LEARN-TO-EARN ACADEMY
+
+Education must lead to real contribution.
+
+Create progressive learning tracks:
+
+**Level 0 — Explorer:** Understand AI tools and complete simple product tests.
+
+**Level 1 — Prompt Builder:** Write useful prompts and structured bug reports.
+
+**Level 2 — Vibe Developer:** Generate and improve working UI components.
+
+**Level 3 — Collaborative Builder:** Work on shared tasks and submit reviewed changes.
+
+**Level 4 — Professional Contributor:** Complete funded bounties and advanced technical tasks.
+
+**Level 5 — Maintainer / Mentor:** Review work, mentor others and coordinate larger missions.
+
+Use short interactive lessons and immediately available practice tasks.
+
+Each learning level should unlock relevant missions.
+
+Training progress should support employability but should not substitute for verified professional experience.
+
+Avoid a large static video-course library as the core product.
+
+The most important educational mechanism is **learning by contributing to real products**.
+
+# 15. COMMUNITY & VIRAL GROWTH
+
+Create a genuinely community-native Web3 experience.
+
+Build around participation, identity, visible progress and social proof.
+
+### Growth Loops
+
+**Contribution Loop:** A submitted improvement becomes a public, shareable proof of work.
+
+**Referral Loop:** Users invite collaborators to a specific mission and receive recognition for qualified participation.
+
+**Project Loop:** Successful sponsors publish new quests and attract more builders.
+
+**Learning Loop:** Beginners progress to higher-value missions and eventually paid work.
+
+**Builder Loop:** Contributors share their achievements, live prototypes and release credits.
+
+**Community Loop:** Teams form around public challenges and continue collaborating.
+
+### Features
+
+- Referral links and invitation codes.
+- Shareable proof-of-work cards.
+- Public project updates.
+- Contributor rankings.
+- Seasonal challenges.
+- Achievement badges.
+- Community missions.
+- Personal build histories.
+- Team profiles.
+- Project discussions.
+- Discord / Telegram / Farcaster / GitHub integrations.
+- Notifications when a submission is accepted or a release ships.
+
+### Anti-Abuse Design
+
+Reward referrals primarily after real activation or accepted contribution, not solely account creation.
+
+Prevent unlimited farming through duplicate accounts, bot-generated submissions, artificial reviews and circular referrals.
+
+Use proportional risk checks, rate limits and evidence-based scoring.
+
+Allow pseudonymous participation where possible.
+
+Do not require invasive identity verification for ordinary free participation.
+
+# 16. BUSINESS MODEL
+
+The platform must support real recurring revenue independent of token-price appreciation.
+
+Implement the foundation for:
+
+**A. Sponsored Quests:** Companies fund specific challenges and accepted results.
+
+**B. Freelance Marketplace:** Platform fees on completed, paid work.
+
+**C. Business Workspaces:** Optional recurring plans for project sponsors needing more sophisticated management.
+
+**D. AI Build Credits:** Paid compute for advanced AI-assisted development when necessary.
+
+**E. Developer Programs:** Sponsored learning tracks, events and builder campaigns.
+
+**F. Ecosystem Partnerships:** Funded technology challenges and community development programs.
+
+Use initial test hypotheses such as:
+
+- 5–10% platform fees on eligible paid bounties.
+- 10% on completed freelancer engagements.
+- Free individual entry.
+- Paid organizational plans introduced only when useful capabilities exist.
+
+Fees must be disclosed before commitment.
+
+Model unit economics for:
+
+- AI inference and execution cost.
+- Hosting.
+- Review and verification.
+- Sponsor payment processing.
+- Reward funding.
+- Disputes and fraud losses.
+- Customer acquisition.
+- Support.
+- Contribution quality.
+
+Prove a real funded transaction and a positive contribution margin before claiming the marketplace economics are validated.
+
+# 17. APPLICATION INFORMATION ARCHITECTURE
+
+Build a coherent premium experience around these product surfaces.
+
+## A. Landing Page
+
+Emotionally compelling, polished, and understandable immediately.
+
+Hero concept:
+
+**Build the future. Earn your place.**
+
+Supporting copy:
+
+"Turn ideas, prompts and real contributions into better software, verified skills and new opportunities."
+
+Primary actions:
+
+**Start Building**  
+**Explore Quests**
+
+Additional sections:
+
+- Live project examples.
+- How participation works.
+- Featured missions.
+- Build-to-Earn mechanism.
+- Community proof.
+- Contributor stories when real.
+- Token ecosystem overview.
+- Opportunities and careers.
+- Roadmap.
+- Community access.
+
+Do not clutter the hero with blockchain network details, compliance prose or infrastructure diagrams.
+
+## B. Explore Missions
+
+A high-quality discovery experience with filtering by skill, difficulty, reward, project, category and availability.
+
+## C. Mission Detail
+
+Clear objectives, application preview, evidence requirements, reward conditions, previous submissions where public, and direct submission.
+
+## D. Vibe Studio
+
+Prompt input, application preview, changes, submission status and iterative feedback.
+
+## E. Project Hub
+
+Project overview, roadmap, open missions, shipped changes, collaborators and development activity.
+
+## F. Contributor Profile
+
+Proof-of-work identity, XP, achievements, skills, projects, reputation and opportunities.
+
+## G. Rewards & Token
+
+Separate balances and histories for XP, reward allocations, actual tokens and payments.
+
+Show token details only according to real deployment and funding status.
+
+## H. Academy
+
+Guided beginner-to-professional progression.
+
+## I. Freelance & Opportunities
+
+Browse and apply to funded work.
+
+## J. Community
+
+Builders, teams, discussions, announcements, seasonal campaigns and leaderboards.
+
+## K. Whitepaper & Ecosystem
+
+Product vision, technology, contribution economy, tokenomics and roadmap.
+
+## L. Sponsor Studio
+
+Project onboarding, funding, quests, deliverables, contributor selection and outcomes.
+
+## M. Operations Console
+
+Restricted tools for:
+
+- Mission review.
+- Reward administration.
+- Disputes.
+- AI execution status.
+- Integration health.
+- Budget controls.
+- Abuse review.
+- Audit evidence.
+
+The public application must not resemble an internal agent-management console.
+
+# 18. DESIGN SYSTEM
+
+Create a distinctive, premium, modern, futuristic visual identity.
+
+Visual references should draw from the sophistication of leading Web3 ecosystems and AI coding products—not generic SaaS templates.
+
+Design characteristics:
+
+- Strong typography.
+- Premium dark-first theme with accessible light support.
+- Restrained gradients and luminous accents.
+- Distinctive but readable visual identity.
+- Excellent component spacing.
+- Subtle microinteractions.
+- Smooth, lightweight transitions.
+- Clear visual hierarchy.
+- Rich but purposeful progress visualization.
+- Beautiful mission cards.
+- High-quality contribution timelines.
+- Interactive project previews.
+- Responsive mobile layouts.
+- Accessibility and keyboard navigation.
+- Fast-loading pages.
+
+Do not substitute excessive glowing effects, oversized cards or decorative dashboards for product usability.
+
+The experience should feel simple within the first 60 seconds, while exposing deeper capabilities progressively.
+
+Default language: English.
+
+Prepare internationalization support, including Persian, without duplicating the interface.
+
+Create and inspect actual responsive application screenshots before considering the design complete.
+
+# 19. TECHNICAL ARCHITECTURE
+
+Choose a minimal, scalable architecture compatible with the existing available infrastructure.
+
+Suggested initial stack:
+
+- Next.js / React / TypeScript for the application.
+- Tailwind CSS and a reusable component system.
+- PostgreSQL for durable application state.
+- Auth with email/social sign-in and optional wallet linking.
+- GitHub App integration for authorized repositories.
+- Versioned API endpoints.
+- Event/outbox processing for reliable asynchronous handoffs.
+- Existing permitted Railway or equivalent deployment infrastructure.
+- EVM-compatible smart contracts for activated on-chain functionality.
+- Standard AI-provider abstraction for model selection and cost limits.
+- Existing portfolio runtime adapters for connected projects.
+
+These are implementation defaults, not permission to create duplicate infrastructure.
+
+The platform owns its own contributor, mission, submission and reward domain.
+
+It should not recreate a second Company OS, agent registry, independent verifier or shared scheduler for the Founder’s existing systems.
+
+### Required Core Entities
+
+- Tenant
+- Project
+- ProjectMembership
+- Contributor
+- IdentityConnection
+- Skill
+- LearningProgress
+- Mission
+- Quest
+- Submission
+- ContributionArtifact
+- Feedback
+- FeedbackCluster
+- Issue
+- ImprovementProposal
+- WorkPacketReference
+- ExecutionReference
+- VerificationReceipt
+- Release
+- ContributionScore
+- RewardPool
+- RewardAllocation
+- TokenClaim
+- WalletConnection
+- Bounty
+- FundedOpportunity
+- Contract
+- PaymentRecord
+- Referral
+- ReputationEvent
+- Dispute
+- AuditEvent
+
+Design clear state machines, ownership, tenant boundaries and relationships.
+
+### Required APIs
+
+Implement documented endpoints for:
+
+- Authentication and contributor profiles.
+- Projects and missions.
+- Quest submissions.
+- Feedback classification.
+- Contribution evidence.
+- AI workflow dispatch.
+- Execution callbacks.
+- Verification receipts.
+- Reward attribution.
+- Wallet linkage and claims.
+- Freelance opportunities.
+- Sponsor funding.
+- Referral attribution.
+- Community activity.
+
+Provide request/response schemas, authorization rules, webhooks and integration tests.
+
+# 20. SECURITY, QUALITY & CORRECTNESS
+
+Maintain practical, minimal controls that protect actual users and real funds.
+
+At minimum:
+
+- Tenant isolation.
+- Proper authentication.
+- Repository authorization.
+- GitHub branch protections and required checks.
+- Secrets exclusion.
+- Sandboxed or permission-bounded AI execution.
+- Prompt-injection resilience.
+- Reproducible test evidence.
+- Idempotent reward processing.
+- Separation of XP, tokens and cash liabilities.
+- Sponsor budget enforcement.
+- Smart-contract testing.
+- Reliable accounting and reconciliation.
+- Auditability.
+- User privacy.
+- Contribution licensing and intellectual-property terms.
+- Appropriate payout and token-sale requirements for the jurisdictions served.
+
+Use proportionate requirements instead of blocking all community participation.
+
+No autonomous agent may transfer funds, alter token supply, change reward entitlements or access unauthorized repositories outside its actual granted authority.
+
+# 21. FIRST REAL CASE STUDIES
+
+Start by evaluating available, authorized portfolio projects as potential design partners and pilot clients.
+
+Possible candidates:
+
+- SignalForge: UI improvements, product testing and community contributions.
+- Earnloop: referral UX, quest design and usability testing.
+- Atelier: onboarding, matching and interface feedback.
+- Noetfield Studio: interactive design and frontend improvements.
+- BuildWorkflow: workflow usability and change-order tasks.
+- Other explicitly authorized projects.
+
+They are independent customers or pilots, not bundled subsidiaries of this platform.
+
+Identify 10–20 genuinely actionable starter missions.
+
+Use actual repository issues, accessible features and demonstrable shortcomings.
+
+Do not invent customer participation, accepted contributions or completed work.
+
+Prepare at least one entirely self-contained sample project so public onboarding works without access to private portfolio repositories.
+
+Protect private source code and business information.
+
+Track the real result of each pilot, including what was fixed, shipped, accepted or still outstanding.
+
+# 22. GENESIS & LAUNCH MECHANICS
+
+Create a real Season 0 onboarding campaign.
+
+Working campaign theme:
+
+**GENESIS BUILDERS — THE FIRST WAVE**
+
+The public should be able to:
+
+1. Join the community.
+2. Create a contributor identity.
+3. Choose a beginner mission.
+4. Submit a real contribution.
+5. Receive XP or verified participation recognition.
+6. Track the contribution lifecycle.
+7. Invite a collaborator.
+8. Discover deeper technical missions.
+9. Connect a wallet optionally.
+10. Learn the published conditions of any token rewards or future distributions.
+
+Support Genesis badges, early-builder profiles, a public activity feed and time-limited challenges.
+
+Do not fabricate activity or create artificial urgency based on nonexistent participants.
+
+Every Genesis reward, deadline and eligibility condition must be explicit.
+
+Create launch content for:
+
+- X / Twitter
+- Farcaster
+- Discord
+- Telegram
+- Reddit
+- GitHub
+- Hacker News
+- Builder communities
+
+Focus outreach on actual builders, hackers, early Web3 contributors, AI coding enthusiasts, maintainers and community organizers.
+
+Do not make venture-capital fundraising a prerequisite for launching the product.
+
+# 23. EXECUTION PRIORITIES
+
+Work in the following order, while preserving the complete long-term product architecture.
+
+## Phase 0 — Functional Foundation
+
+Implement:
+
+- Premium public website.
+- Authentication.
+- Contributor profiles.
+- Real projects and quests.
+- Submission workflow.
+- Feedback capture.
+- XP and reputation.
+- Contribution evidence.
+- Basic community and referrals.
+- Initial whitepaper.
+- Production deployment.
+
+The first public user must be able to complete a meaningful contribution cycle.
+
+## Phase 1 — Agentic Development Bridge
+
+Implement:
+
+- Feedback classification.
+- Deduplication.
+- Issue generation.
+- WorkPacket integration.
+- AI coding dispatch.
+- Pull request tracking.
+- Testing.
+- Verification.
+- Release feedback.
+- Attribution.
+
+Demonstrate one actual submitted issue progressing to an implemented and verified change.
+
+## Phase 2 — Economic Activation
+
+Implement:
+
+- Sponsor projects.
+- Funded bounties.
+- Reward pools.
+- Earned reward accounting.
+- Marketplace fees.
+- Wallet connections.
+- Token contracts and claim infrastructure.
+- Funded distribution where authorized and operational.
+- Treasury transparency.
+- Basic freelancer engagement lifecycle.
+
+Distinguish live financial operations from testnet functionality.
+
+## Phase 3 — Growth & Expansion
+
+Implement:
+
+- Full Academy.
+- Advanced Vibe Studio.
+- Team formation.
+- Contributor matching.
+- International expansion.
+- More external projects.
+- Rich community integrations.
+- Advanced token utility.
+- Additional open developer integrations.
+
+Phase labels are delivery priorities, not excuses to leave foundational user journeys incomplete.
+
+# 24. REQUIRED ACCEPTANCE TESTS
+
+The product cannot be represented as complete solely because its UI renders.
+
+Provide evidence for these end-to-end scenarios:
+
+**Test A — Beginner Contribution**
+
+A real user account can join, open a mission, submit feedback, receive a durable submission ID and track its review.
+
+**Test B — AI Feedback Loop**
+
+A submission is classified, associated with an issue, routed to an authorized execution process and returned with an independently checkable outcome.
+
+**Test C — Vibe Coding**
+
+A contributor can submit an implementation through a supported AI coding or GitHub workflow, with actual artifacts and tests.
+
+**Test D — Release Revalidation**
+
+A verified release notifies the contributor and collects follow-up results.
+
+**Test E — Reward Correctness**
+
+XP is recorded correctly; eligible economic rewards have evidence and do not exceed the available funded pool.
+
+**Test F — Referral Integrity**
+
+Duplicate and self-referral abuse cannot generate unlimited rewards.
+
+**Test G — Project Isolation**
+
+One external project cannot access another project's private data or funds.
+
+**Test H — Sponsor Marketplace**
+
+A sponsor can post a funded opportunity, select a contributor and follow the work lifecycle.
+
+**Test I — Token Lifecycle**
+
+Where token contracts are deployed, contract addresses, network, claim transactions and balances are independently verifiable.
+
+Where not deployed, the product accurately presents the current stage.
+
+**Test J — Production Quality**
+
+Build, lint, tests, accessibility checks, security checks and responsive flows pass.
+
+**Test K — Agent Continuation**
+
+After a verified work result, the connected Company OS can evaluate the outcome, update mission state and schedule the next authorized action without requiring the Founder to re-enter the original task.
+
+# 25. METRICS & OPERATING INTELLIGENCE
+
+Build a compact internal analytics layer to measure:
+
+- Real registrations.
+- Activated contributors.
+- First-mission completion.
+- Repeat contribution.
+- Accepted submission rate.
+- Submission-to-issue conversion.
+- Issue-to-verified-release conversion.
+- Time to first meaningful outcome.
+- Contribution quality.
+- Verified rewards.
+- Sponsor funding.
+- Paid work delivered.
+- Revenue collected.
+- Platform contribution margin.
+- Contributor retention.
+- Successful referrals.
+- AI execution costs.
+
+Initial launch targets to validate, not to report as achieved:
+
+- First 100 genuine signups.
+- At least 30 users completing a real initial action.
+- At least 10 useful verified contributions.
+- At least one end-to-end AI development improvement.
+- At least one external sponsor or funded work opportunity.
+- At least one verified positive-margin commercial transaction.
+
+Distinguish internal pilot funding from genuinely external commercial demand.
+
+Use performance evidence to reprioritize the roadmap.
+
+# 26. REQUIRED DELIVERABLES
+
+Create and maintain:
+
+- `AGENTS.md`
+- `README.md`
+- `docs/PRODUCT_THESIS.md`
+- `docs/COMPETITOR_BENCHMARKS.md`
+- `docs/PRODUCT_REQUIREMENTS.md`
+- `docs/USER_JOURNEYS.md`
+- `docs/UX_DESIGN_SYSTEM.md`
+- `docs/ARCHITECTURE.md`
+- `docs/AGENT_INTEGRATION_CONTRACTS.md`
+- `docs/CONTRIBUTION_PROOF.md`
+- `docs/QUEST_REWARD_ENGINE.md`
+- `docs/TOKENOMICS_WHITEPAPER.md`
+- `docs/TOKEN_ECONOMICS_MODEL.md`
+- `docs/MARKETPLACE_ECONOMICS.md`
+- `docs/SECURITY_AND_IP.md`
+- `docs/GENESIS_GROWTH.md`
+- `docs/ROADMAP.md`
+- `docs/QA_AND_ACCEPTANCE.md`
+- `.env.example`
+- Database migrations.
+- Deployable application source.
+- Smart-contract source and tests where applicable.
+- CI/CD workflows.
+- API documentation.
+- Genuine production screenshots and verification evidence.
+
+Avoid documentation-only delivery.
+
+Implementation quality and working user journeys take priority.
+
+# 27. AUTONOMOUS EXECUTION PROTOCOL
+
+Begin by discovering the actual repository, available integrations, existing infrastructure and authorized credentials.
+
+Reuse working components.
+
+Do not introduce a new system when a compatible canonical service already exists.
+
+Make and implement reasonable product decisions without unnecessary clarification.
+
+Proceed iteratively:
+
+**Inspect → Design → Implement → Test → Verify → Deploy → Observe → Improve**
+
+Maintain a live task backlog, with explicit ownership and states.
+
+When a task passes independent verification, feed the result into the next appropriate execution decision.
+
+Keep Founder-level decisions separate from routine implementation.
+
+Do not claim successful integration merely because an API contract was drafted.
+
+Do not claim deployment merely because code was committed.
+
+Do not claim token issuance merely because a contract was compiled.
+
+Do not claim revenue, users, jobs, token holders, liquidity or paid contributors without observable evidence.
+
+Where access to an external provider is missing, complete the rest of the production flow, identify the precise missing integration and maintain truthful feature status.
+
+# 28. FINAL MISSION
+
+The final product must become a continuously improving global human–AI builder ecosystem.
+
+People should enter for different reasons:
+
+Some want to learn AI coding.
+
+Some want to explore innovative applications.
+
+Some want to complete quests.
+
+Some want to discover projects and communities.
+
+Some want to earn tokens.
+
+Some want freelance opportunities.
+
+Some want to hire talented builders.
+
+Some want to create and finance software products.
+
+Some want to participate in the ecosystem's market and token economy.
+
+These motivations must coexist within a coherent product.
+
+The platform's competitive advantage is its ability to transform community participation into verifiable software progress, professional opportunity and economic activity.
+
+**The north-star operating loop is:**
+
+**People contribute → AI agents build → Humans verify → Products improve → Contributors earn → Communities grow → Sponsors fund more work → The ecosystem compounds.**
+
+Build the platform as a lightweight, premium, extensible application first.
+
+Preserve the long-term vision without unnecessarily complicating initial onboarding.
+
+The target is not another token dashboard, generic community portal or AI coding demonstration.
+
+**The target is a real participatory software-building economy.**
+
+**EXECUTE: BUILD → VERIFY → SHIP → ACTIVATE → EARN → SCALE.**

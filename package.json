@@ -1,0 +1,19 @@
+{
+  "name": "proofloom-genesis",
+  "private": true,
+  "version": "0.3.0",
+  "type": "module",
+  "scripts": {
+    "prepare:local": "node scripts/make-local.mjs",
+    "start": "bun run src/local.tsx",
+    "dev": "bun --watch src/local.tsx",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "hono": "^4.10.0",
+    "postgres": "^3.4.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
