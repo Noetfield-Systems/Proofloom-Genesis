@@ -1,5 +1,11 @@
 name: Proofloom independent release evidence
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/release-verify.yml'
+      - 'scripts/actions-identity.mjs'
+      - 'scripts/release-verifier.mjs'
   workflow_dispatch:
   schedule:
     - cron: '5-55/10 * * * *'
@@ -19,6 +25,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Validate signed independent verifier identity
+        run: node scripts/oidc-diagnostic.mjs verifier
       - name: Verify merged GitHub artifacts and live production behavior
         env:
           GITHUB_TOKEN: ${{ github.token }}
