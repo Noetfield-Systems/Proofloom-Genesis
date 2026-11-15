@@ -27,3 +27,7 @@ Set `DATABASE_URL=${{Postgres.DATABASE_URL}}`, `NODE_ENV=production`, `PORT=3000
 ## v0.4 GitHub execution and UI extension
 
 PR implementation adds a scoped q13 translation mission, a contributor-readable development timeline, expiring WorkPacket leases and server-side GitHub evidence validation. GitHub Actions runner/verifier are opt-in and remain disabled without a repository-scoped App, configured Actions secrets, and enabling variables. The API reports deployment_sha from Railway source revision metadata when available; a missing SHA cannot prove a release. Runbook and exact test gates: [BRIDGE_PILOT_OPERATIONS.md](BRIDGE_PILOT_OPERATIONS.md). No live autonomous PR or verified release should be claimed from the initial code merge alone.
+
+## v0.5
+
+Public release now includes the premium visual system, real searchable mission discovery, Studio submission, public Activity evidence and separate verifier receipt links. The scoped runner and verifier use GitHub Actions OIDC. No App secret is needed for this mode; the repository must permit Actions PR creation. See BRIDGE_PILOT_OPERATIONS.md. Verify the production SHA through the live-release smoke workflow before asserting deployment.

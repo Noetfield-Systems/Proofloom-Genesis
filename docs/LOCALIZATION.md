@@ -25,4 +25,8 @@ Current complete dictionaries: **English, Persian, Arabic, Spanish, French, Germ
 
 ## v0.4 addition
 
-All nine published non-English dictionaries include the new q13 mission title/brief/deliverable and contributor WorkPacket evidence/timeline strings. The enforced canonical key set grows from 354 to 379 keys per language; the locale parity test must pass before release.
+All nine published non-English dictionaries include the new q13 mission title/brief/deliverable and contributor WorkPacket evidence/timeline strings. The enforced canonical key set grows from 354 to 401 or more keys per language; the locale parity test must pass before release.
+
+## v0.5 premium UI
+
+The nine published dictionaries include the new high-priority mission search, studio and premium interface strings. Translation parity remains enforced across every published locale; RTL direction and locale cookie persistence are unchanged.

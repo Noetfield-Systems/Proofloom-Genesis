@@ -37,3 +37,7 @@ Actual browser screenshots, accessibility audits, email confirmation/reset, paym
 ## Genesis v0.4 implementation evidence
 
 GitHub PR #1 adds a bounded translation-to-PR pilot, explicit lease recovery, separately credentialed release verification and a contributor evidence timeline. The repository CI must pass after these changes. **No real end-to-end contributor execution claim is justified by this implementation PR.** A successful PR merge and Railway deploy of the implementation code are distinct from a genuine user-sourced task releasing through the automated bridge.
+
+## v0.5 verification scope
+
+Source-level tests cover token signing, exact OIDC claims, role separation, expired lease recovery, translation parity (408 keys across nine non-English languages), genuine Studio submission wiring, public Activity proof, and separate QA vs verifier receipts. CI and production results must reference the actual v0.5 deployed SHA; results from v0.4 cannot be relabeled. First genuine q13 runner-originated PR and verifier receipt remain separately auditable gates.

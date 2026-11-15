@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {parseTranslationProposal,isPilotPacket,branchFor,containsExpectedTranslation,REPOSITORY} from '../scripts/github-bridge.mjs';
+import {parseTranslationProposal,isPilotPacket,branchFor,containsExpectedTranslation,REPOSITORY,leaseNeedsRecovery,stableEventId} from '../scripts/github-bridge.mjs';
 const good={locale:'fa',key:'Missions',text:'ماموریت‌های واقعی',why:'The navigation needs a more specific translation.'};
 test('only safe, narrow, human-reviewed q13 translation proposals are executable',()=>{
   assert.deepEqual(parseTranslationProposal(JSON.stringify(good)),good);
@@ -27,11 +27,27 @@ test('renderer assertion checks actual visible translated string',()=>{
 test('both runtime workflows use separate credentials and opt-in switches',()=>{
   const bridge=readFileSync(new URL('../.github/workflows/bridge-runner.yml',import.meta.url),'utf8');
   const verify=readFileSync(new URL('../.github/workflows/release-verify.yml',import.meta.url),'utf8');
-  assert.match(bridge,/PROOFLOOM_BRIDGE_RUNNER_ENABLED/);
-  assert.match(bridge,/create-github-app-token@v2/);
-  assert.match(bridge,/PROOFLOOM_GITHUB_APP_PRIVATE_KEY/);
+  assert.match(bridge,/id-token: write/);
+  assert.match(bridge,/issues: write/);
+  assert.match(bridge,/pull-requests: write/);
+  assert.match(bridge,/GITHUB_TOKEN/);
   assert.doesNotMatch(bridge,/PROOFLOOM_VERIFIER_API_KEY/);
-  assert.match(verify,/PROOFLOOM_BRIDGE_VERIFIER_ENABLED/);
-  assert.match(verify,/PROOFLOOM_VERIFIER_API_KEY/);
+  assert.match(verify,/id-token: write/);
+  assert.match(verify,/checks: read/);
   assert.doesNotMatch(verify,/PROOFLOOM_BRIDGE_API_KEY/);
+});
+
+test('expired and legacy leases are recoverable without stealing active leases',()=>{
+ const now=Date.parse('2026-11-15T00:00:00Z');
+ assert.equal(leaseNeedsRecovery({status:'leased',lease_expires_at:'2026-11-14T23:59:59Z'},now),true);
+ assert.equal(leaseNeedsRecovery({status:'leased',lease_expires_at:'2026-11-15T00:00:01Z'},now),false);
+ assert.equal(leaseNeedsRecovery({status:'leased',lease_expires_at:null},now),true);
+ assert.equal(leaseNeedsRecovery({status:'dispatched',lease_expires_at:null},now),false);
+});
+test('each WorkPacket state has a reproducible UUID event id for retry safety',()=>{
+ const packet='12345678-abcd-4567-9876-123456789abc';
+ const a=stableEventId(packet,'implementation.ready');
+ assert.match(a,/^[0-9a-f]{8}-[0-9a-f]{4}-5[0-9a-f]{3}-a[0-9a-f]{3}-[0-9a-f]{12}$/);
+ assert.equal(a,stableEventId(packet,'implementation.ready'));
+ assert.notEqual(a,stableEventId(packet,'qa.completed'));
 });

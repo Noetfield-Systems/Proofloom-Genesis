@@ -5,10 +5,17 @@
 import { appendFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { REPOSITORY, parseTranslationProposal, branchFor, containsExpectedTranslation } from './github-bridge.mjs';
+import { actionsIdentity } from './actions-identity.mjs';
 
 const ORIGIN=process.env.PROOFLOOM_BASE_URL||'https://proofloom-global-web-production.up.railway.app';
 const API='https://api.github.com';
 const token=process.env.GITHUB_TOKEN;
+let cachedCredential=null,credentialAt=0;
+async function verifierCredential(){
+ if(process.env.VERIFIER_API_KEY)return process.env.VERIFIER_API_KEY;
+ if(cachedCredential&&Date.now()-credentialAt<120000)return cachedCredential;
+ cachedCredential=await actionsIdentity('verifier');credentialAt=Date.now();return cachedCredential;
+}
 async function github(path) {
   const r=await fetch(API+path,{headers:{
     Authorization:'Bearer '+token,Accept:'application/vnd.github+json',
@@ -19,7 +26,7 @@ async function github(path) {
 }
 async function verificationApi(path,{method='GET',body}={}) {
   const r=await fetch(ORIGIN+path,{method,headers:{
-    Authorization:'Bearer '+process.env.VERIFIER_API_KEY,'Content-Type':'application/json'
+    Authorization:'Bearer '+await verifierCredential(),'Content-Type':'application/json'
   },...(body?{body:JSON.stringify(body)}:{})});
   const data=await r.json().catch(()=>({}));
   if(!r.ok)throw Error('Verifier callback '+r.status+' '+(data.error||''));
@@ -54,8 +61,9 @@ export async function checkEvidence(item,{gh=github,fetchLive=fetch}={}) {
     runtime_assertion:'passed',checked_at:new Date().toISOString()};
 }
 export async function main(){
-  if(!token || !process.env.VERIFIER_API_KEY || !process.env.GITHUB_RUN_ID)
-    throw Error('GITHUB_TOKEN, VERIFIER_API_KEY and GITHUB_RUN_ID required');
+  if(!token || !process.env.GITHUB_RUN_ID)
+    throw Error('GITHUB_TOKEN and GITHUB_RUN_ID required');
+  await verifierCredential();
   const queue=await verificationApi('/api/v1/bridge/verify-queue');
   let ok=0,failed=0;
   for(const item of queue.items||[]){

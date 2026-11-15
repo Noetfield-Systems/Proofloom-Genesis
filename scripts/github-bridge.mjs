@@ -3,8 +3,9 @@
  * Executes only accepted q13 localization proposals for this repository.
  * All other WorkPackets remain in triage. Never eval user input or run its commands.
  */
-import { randomUUID } from 'node:crypto';
+import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
+import { actionsIdentity } from './actions-identity.mjs';
 
 export const REPOSITORY = 'Noetfield-Systems/Proofloom-Genesis';
 export const SUPPORTED_LOCALES = new Set(['fa','ar','es','fr','de','pt-BR','ru','zh-CN','hi']);
@@ -12,6 +13,12 @@ export const SURFACE_KEYS = new Set(['Missions','Community','Academy','Opportuni
 const ORIGIN = process.env.PROOFLOOM_BASE_URL || 'https://proofloom-global-web-production.up.railway.app';
 const API = 'https://api.github.com';
 const RUNNER_ID = String(process.env.GITHUB_RUN_ID || 'manual') + '-' + String(process.env.GITHUB_RUN_ATTEMPT || '1');
+let cachedCredential=null,credentialAt=0;
+async function agentCredential(){
+  if(process.env.BRIDGE_API_KEY)return process.env.BRIDGE_API_KEY;
+  if(cachedCredential&&Date.now()-credentialAt<2*60*1000)return cachedCredential;
+  cachedCredential=await actionsIdentity('agent');credentialAt=Date.now();return cachedCredential;
+}
 
 export function parseTranslationProposal(body) {
   let x;
@@ -23,6 +30,14 @@ export function parseTranslationProposal(body) {
       /[<>{}\u0000-\u001f]/u.test(x.text)) throw Error('unsafe_translation_text');
   if (typeof x.why!=='string' || x.why.trim().length<12 || x.why.length>700) throw Error('missing_rationale');
   return {locale:x.locale,key:x.key,text:x.text.trim(),why:x.why.trim()};
+}
+export function leaseNeedsRecovery(item, now=Date.now()) {
+  const expires=Date.parse(item?.lease_expires_at||'');
+  return item?.status==='leased' && (!Number.isFinite(expires)||expires<=now);
+}
+export function stableEventId(packetId,type) {
+  const x=createHash('sha256').update(packetId+':'+type).digest('hex');
+  return x.slice(0,8)+'-'+x.slice(8,12)+'-5'+x.slice(13,16)+'-a'+x.slice(17,20)+'-'+x.slice(20,32);
 }
 export function isPilotPacket(x) {
   return x.project_id==='proofloom-lab' && x.mission_id==='q13' &&
@@ -50,7 +65,7 @@ async function github(path, {method='GET',body}={}) {
 }
 async function platform(path,{method='GET',body}={}) {
   const response=await fetch(ORIGIN+path,{method,headers:{
-    Authorization:'Bearer '+process.env.BRIDGE_API_KEY,'Content-Type':'application/json'
+    Authorization:'Bearer '+await agentCredential(),'Content-Type':'application/json'
   },...(body?{body:JSON.stringify(body)}:{})});
   const data=await response.json().catch(()=>({}));
   if (!response.ok) {
@@ -61,7 +76,7 @@ async function platform(path,{method='GET',body}={}) {
 }
 async function event(item,type,url) {
   return platform('/api/v1/bridge/event',{method:'POST',body:{
-    workpacket_id:item.id,event_type:type,event_id:randomUUID(),evidence_url:url
+    workpacket_id:item.id,event_type:type,event_id:stableEventId(item.id,type),evidence_url:url
   }});
 }
 async function findIssue(id) {
@@ -71,6 +86,14 @@ async function findIssue(id) {
 async function findPR(head) {
   const list=await github('/repos/'+REPOSITORY+'/pulls?state=all&per_page=100');
   return list.find(x=>x.head?.ref===head && x.base?.ref==='main');
+}
+async function ensurePRChecks(pr) {
+  const list=await github('/repos/'+REPOSITORY+'/actions/workflows/ci.yml/runs?branch='+encodeURIComponent(pr.head.ref)+'&per_page=30');
+  if((list.workflow_runs||[]).some(x=>x.head_sha===pr.head.sha)){
+    return;
+  }
+  await github('/repos/'+REPOSITORY+'/actions/workflows/ci.yml/dispatches',{method:'POST',body:{ref:pr.head.ref}});
+  console.log('REQUESTED_PR_CHECKS',pr.head.ref,pr.head.sha);
 }
 async function checkedPR(pr) {
   const runs=await github('/repos/'+REPOSITORY+'/commits/'+pr.head.sha+'/check-runs?per_page=100');
@@ -88,9 +111,14 @@ async function processPacket(item) {
   if (item.status==='triage_ready' || item.status==='leased') {
     if (item.status==='triage_ready') {
       const lease=await platform('/api/v1/bridge/lease',{method:'POST',body:{workpacket_id:item.id,runner_id:RUNNER_ID}});
-      if(lease.repository!==REPOSITORY)throw Error('repository_grant_mismatch');
+      if(lease.repository!==REPOSITORY||lease.lease_owner!==RUNNER_ID)throw Error('repository_grant_mismatch');
     } else if(item.lease_owner!==RUNNER_ID) {
-      console.log('LEASE_HELD_BY_OTHER',item.id);return;
+      if (!leaseNeedsRecovery(item)) {
+        console.log('LEASE_HELD_BY_OTHER',item.id);return;
+      }
+      const recovered=await platform('/api/v1/bridge/lease',{method:'POST',body:{workpacket_id:item.id,runner_id:RUNNER_ID}});
+      if(recovered.repository!==REPOSITORY||recovered.lease_owner!==RUNNER_ID)throw Error('lease_recovery_not_authorized');
+      console.log('LEASE_RECOVERED',item.id);
     }
     const file=await translationFile(proposal.locale);
     if(!Object.hasOwn(file.source,proposal.key))throw Error('translation_key_missing_in_current_main');
@@ -132,12 +160,13 @@ async function processPacket(item) {
       }});
     }
     await event(item,'implementation.ready',pr.html_url);
+    await ensurePRChecks(pr);
     item.status='implementation_ready';
   }
   if (item.status==='implementation_ready') {
     const pr=await findPR(branch);
     if(!pr)throw Error('pr_not_found');
-    if (!await checkedPR(pr)){console.log('AWAITING_PR_CI',pr.html_url);return;}
+    if (!await checkedPR(pr)){await ensurePRChecks(pr);console.log('AWAITING_PR_CI',pr.html_url);return;}
     await event(item,'qa.completed',pr.html_url+'/checks');
     item.status='qa_passed';
   }
@@ -164,16 +193,19 @@ async function processPacket(item) {
       console.log('AWAITING_RUNTIME_ASSERTION',item.id);return;
     }
     await event(item,'release.reported','https://github.com/'+REPOSITORY+'/commit/'+pr.merge_commit_sha);
+    await github('/repos/'+REPOSITORY+'/actions/workflows/release-verify.yml/dispatches',{method:'POST',body:{ref:'main'}});
     console.log('RELEASE_REPORTED_AWAITING_INDEPENDENT_VERIFIER',item.id);
   }
 }
 export async function main() {
-  if(!process.env.GITHUB_TOKEN || !process.env.BRIDGE_API_KEY)throw Error('Missing GitHub App token or bridge secret');
+  if(!process.env.GITHUB_TOKEN)throw Error('Missing repository-scoped GitHub token');
+  await agentCredential();
   const q=await platform('/api/v1/bridge/queue');
   if(!q.execution_enabled || q.allowed_repository!==REPOSITORY){
     console.log('BRIDGE_DISABLED_OR_REPOSITORY_MISMATCH');return;
   }
-  const work=q.items.filter(isPilotPacket).slice(0,Number(process.env.PROOFLOOM_MAX_PACKETS||3));
+  const limit=Math.max(1,Math.min(3,Number(process.env.PROOFLOOM_MAX_PACKETS||3)||3));
+  const work=q.items.filter(isPilotPacket).slice(0,limit);
   for(const item of work) {
     try {await processPacket(item);}
     catch(e) {console.error('PACKET_BLOCKED',item.id,String(e.message||e));process.exitCode=1;}

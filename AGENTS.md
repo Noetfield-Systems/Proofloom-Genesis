@@ -23,3 +23,7 @@ XP is off-chain and non-financial. Future token allocations are not current bala
 
 ## Quality bar
 For any feature, include real persistence, failure states, tenant boundaries where relevant, API tests and observed deployed behavior. Prioritize onboarding, real contribution quality, referral integrity and first sponsor-paid work.
+
+## v0.5 delivery doctrine
+
+Native GitHub Actions OIDC provides scoped, short-lived agent/verifier identity without requiring a copied App private key. The q13 translation runner is strictly bounded; GitHub repository Actions PR-creation settings may still be required for actual writes. The premium UI, live mission search, authenticated Studio, activity proof and separate verifier receipt are source features, NOT assertions of a completed real-user GitHub PR. Never equate code deployment with a verified user contribution.
