@@ -2,16 +2,16 @@ name: Proofloom independent release evidence
 on:
   workflow_dispatch:
   schedule:
-    - cron: '3-58/5 * * * *'
+    - cron: '5-55/10 * * * *'
 permissions:
   contents: read
   checks: read
+  id-token: write
 concurrency:
   group: proofloom-release-verifier
   cancel-in-progress: false
 jobs:
   verify:
-    if: vars.PROOFLOOM_BRIDGE_VERIFIER_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
@@ -22,6 +22,5 @@ jobs:
       - name: Verify merged GitHub artifacts and live production behavior
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          VERIFIER_API_KEY: ${{ secrets.PROOFLOOM_VERIFIER_API_KEY }}
           PROOFLOOM_BASE_URL: https://proofloom-global-web-production.up.railway.app
         run: node scripts/release-verifier.mjs
