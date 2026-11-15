@@ -1,35 +1,35 @@
 name: Proofloom bounded GitHub bridge
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bridge-runner.yml'
+      - 'scripts/actions-identity.mjs'
+      - 'scripts/github-bridge.mjs'
   workflow_dispatch:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/10 * * * *'
 permissions:
-  contents: read
+  contents: write
+  issues: write
+  pull-requests: write
+  actions: write
+  id-token: write
 concurrency:
   group: proofloom-bridge-runner
   cancel-in-progress: false
 jobs:
   dispatch:
-    if: vars.PROOFLOOM_BRIDGE_RUNNER_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
-      - name: Issue repository-scoped GitHub App installation token
-        id: app-token
-        uses: actions/create-github-app-token@v2
-        with:
-          app-id: ${{ secrets.PROOFLOOM_GITHUB_APP_ID }}
-          private-key: ${{ secrets.PROOFLOOM_GITHUB_APP_PRIVATE_KEY }}
-          owner: Noetfield-Systems
-          repositories: Proofloom-Genesis
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Dispatch and reconcile bounded translation WorkPackets
         env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
-          BRIDGE_API_KEY: ${{ secrets.PROOFLOOM_BRIDGE_API_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
           PROOFLOOM_BASE_URL: https://proofloom-global-web-production.up.railway.app
           PROOFLOOM_MAX_PACKETS: '3'
           PROOFLOOM_AUTO_MERGE: 'true'
