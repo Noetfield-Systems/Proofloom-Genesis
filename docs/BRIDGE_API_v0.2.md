@@ -59,4 +59,8 @@ The `release_verified` transition requires the independent verifier endpoint, no
 
 ## Missing until separately verified
 
-GitHub repo creation and push, GitHub App installation/repository credentials, authenticated agent runner, actual PR, independent QA on generated changes, production release check, real-user revalidation, funding/checkout/payout and EVM issuance. Any of these should be reported only when its unique evidence exists.
+GitHub App installation/repository credentials, authenticated agent runner, actual PR, independent QA on generated changes, production release check, real-user revalidation, funding/checkout/payout and EVM issuance. Any of these should be reported only when its unique evidence exists.
+
+## v0.4 pilot extension
+
+See BRIDGE_PILOT_OPERATIONS.md for the strict q13 translation-to-PR implementation, lease owner/expiry fields, separate verifier-only queue, GitHub issue/PR/CI evidence checks, and live deployment SHA verification. This extends the existing contract without representing a completed real community contribution or verified release.
