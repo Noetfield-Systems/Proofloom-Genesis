@@ -67,3 +67,9 @@ Start with [Bridge API v0.2](docs/BRIDGE_API_v0.2.md), [QA report](docs/QA_AND_A
 The responsive interface now has enhanced contrast, keyboard focus and mobile layout; a contributor WorkPacket timeline shows exact recorded events. Mission q13 accepts bounded JSON localization changes with human review, a repo-scoped GitHub App issue/PR runner, and a separately credentialed released-change verifier. All nine published non-English languages include the new mission and timeline labels. The source tests and CI enforce localization coverage and release-evidence invariants.
 
 **Actual activation status:** GitHub App installation/secrets, bridge enablement and a genuine user-originated verified release are not evidenced. Workflows are opt-in; do not interpret code presence as operational dispatch. Follow [Bridge pilot operations](docs/BRIDGE_PILOT_OPERATIONS.md). The existing source-linked Railway Web and PostgreSQL remain authoritative.
+
+## Genesis v0.5 — premium UI and native GitHub Actions identity
+
+The interface now includes an updated brand system, higher-contrast responsive navigation, searchable live missions, a real Studio mission submission form, richer contributor identity and a public evidence-based Activity feed. Each of the nine published non-English dictionaries adds the critical new interface labels. GitHub bridge runner and verifier use short-lived GitHub Actions OIDC tokens instead of requiring copied static App credentials. The first independently verified user-sourced PR/release is still a distinct milestone until its observed evidence exists.
+
+See [the canonical bridge operations guide](docs/BRIDGE_PILOT_OPERATIONS.md) for setup and exact acceptance. The original Noetfield and other ventures' databases, identities and treasuries remain separate.
