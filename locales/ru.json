@@ -399,5 +399,12 @@
   "Your proposed improvement": "Ваше предложение по улучшению",
   "Join to start writing ↗": "Присоединиться и начать писать ↗",
   "Genesis profile": "Профиль Genesis",
-  "How your work moves forward": "Как продвигается ваша работа"
+  "How your work moves forward": "Как продвигается ваша работа",
+  "Activity": "Активность",
+  "NETWORK ACTIVITY / EVIDENCE FIRST": "АКТИВНОСТЬ СЕТИ / СНАЧАЛА ДОКАЗАТЕЛЬСТВА",
+  "See what has actually happened.": "Посмотрите, что действительно произошло.",
+  "Recorded WorkPacket states.": "Зафиксированные состояния WorkPacket.",
+  "Verified release receipts.": "Подтверждения проверенных релизов.",
+  "No independently verified release yet.": "Независимо проверенных релизов пока нет.",
+  "Open verification receipt ↗": "Открыть подтверждение проверки ↗"
 }
