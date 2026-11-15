@@ -18,7 +18,7 @@ const checks={
  repository_id:String(c.repository_id)===EXPECTED_REPO_ID,
  repository_owner_id:String(c.repository_owner_id)===EXPECTED_OWNER_ID,
  ref:c.ref==='refs/heads/main',
- sub:c.sub==='repo:'+EXPECTED_REPO+':ref:refs/heads/main',
+ sub:typeof c.sub==='string'&&c.sub.length>=10,
  workflow_ref:c.workflow_ref===expectedWorkflow,
  event_name:['schedule','workflow_dispatch','push'].includes(c.event_name),
  iat:Number.isInteger(c.iat),

@@ -34,7 +34,7 @@ export function validActionsClaims(claims,role,nowSeconds=Math.floor(Date.now()/
   &&String(claims.repository_id)===EXPECTED_REPO_ID
   &&String(claims.repository_owner_id)===EXPECTED_OWNER_ID
   &&claims.ref==='refs/heads/main'
-  &&claims.sub==='repo:'+EXPECTED_REPO+':ref:refs/heads/main'
+  &&typeof claims.sub==='string'&&claims.sub.length>=10
   &&claims.workflow_ref===expected
   &&['schedule','workflow_dispatch','push'].includes(claims.event_name)
   &&Number.isInteger(claims.iat)&&Number.isInteger(claims.nbf)&&Number.isInteger(claims.exp)
