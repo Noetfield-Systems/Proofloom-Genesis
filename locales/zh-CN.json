@@ -399,5 +399,12 @@
   "Your proposed improvement": "你提出的改进",
   "Join to start writing ↗": "加入并开始撰写 ↗",
   "Genesis profile": "Genesis 个人资料",
-  "How your work moves forward": "你的工作如何推进"
+  "How your work moves forward": "你的工作如何推进",
+  "Activity": "动态",
+  "NETWORK ACTIVITY / EVIDENCE FIRST": "网络动态 / 证据优先",
+  "See what has actually happened.": "查看实际发生的事情。",
+  "Recorded WorkPacket states.": "已记录的 WorkPacket 状态。",
+  "Verified release receipts.": "经过验证的发布凭证。",
+  "No independently verified release yet.": "尚无独立验证的发布。",
+  "Open verification receipt ↗": "打开验证凭证 ↗"
 }
