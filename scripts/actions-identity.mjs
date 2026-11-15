@@ -71,7 +71,7 @@ export async function actionsIdentity(role){
  const requestToken=process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN;
  if(!url||!requestToken)throw Error('github_actions_oidc_unavailable');
  const endpoint=new URL(url);
- if(endpoint.protocol!=='https:')throw Error('non_https_oidc_endpoint');
+ if(!(endpoint.protocol==='https:'||(endpoint.protocol==='http:'&&['localhost','127.0.0.1','[::1]'].includes(endpoint.hostname))))throw Error('unsafe_oidc_endpoint');
  endpoint.searchParams.set('audience',AUDIENCES[role]);
  const r=await fetch(endpoint,{headers:{Authorization:'Bearer '+requestToken},signal:AbortSignal.timeout(8000)});
  if(!r.ok)throw Error('github_actions_oidc_request_'+r.status);
