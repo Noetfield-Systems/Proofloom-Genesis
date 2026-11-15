@@ -1,56 +1,43 @@
-# Proofloom Genesis v0.4 — bounded GitHub delivery pilot
+# Proofloom Genesis v0.5 — Production bridge and contributor experience
 
-**Status:** Code and workflows are implemented, but GitHub App credentials and a genuine user-originated PR are NOT evidenced. This is an operating runbook, not a completed release receipt.
+## Shipped UI
+Proofloom remains independent. The upgrade includes a premium responsive design, translated navigation, searchable missions, genuine authenticated Studio submissions, contributor proof timelines and a public, database-backed Activity page. XP remains off-chain and non-financial.
 
-## Scope
+## Bound execution path
+**One pilot mission only:** q13, accepted translations of existing UI keys in Noetfield-Systems/Proofloom-Genesis. Accepted submissions create WorkPackets. A GitHub Actions runner claims one eight-minute lease, creates a WorkPacket-linked issue, a branch and a one-file PR, requests PR CI and merges only if checks pass. The PR and reported deployment are not independently verified releases.
 
-The first automated vertical slice is q13: Improve a real interface translation. The contributor supplies strict JSON with locale, key, text and why, for example:
+The separate release-verification workflow reads the merged GitHub commit, PR checks, exact Railway deployed revision and live localized content before posting a verifier-only receipt. The original contributor may then revalidate or reopen.
 
-    {"locale":"fa","key":"Missions","text":"ماموریت‌های واقعی","why":"This version is clearer for Persian-speaking builders."}
+## No-static-secret GitHub Actions authentication
+Both Actions workflows use short-lived, audience-specific GitHub OIDC identities verified against published RSA JWKS and exact issuer, audience, repository ID, organization ID, workflow_ref, ref, event name, expiry and signature. The implementation runner cannot use the verifier identity. GitHub Actions uses the default ephemeral GITHUB_TOKEN for its own repository GitHub API calls.
 
-Allowed locales: fa, ar, es, fr, de, pt-BR, ru, zh-CN, hi. Allowed keys are a fixed set of public UI labels in scripts/github-bridge.mjs. Unrelated WorkPackets remain in triage and are never run as code or commands. Human approval grants off-chain XP and a WorkPacket, NOT source merge or release verification.
+Runner permissions: contents write, issues write, pull-requests write, actions write, id-token write.
+Verifier permissions: contents read, checks read, id-token write.
 
-## GitHub App authorization
+**Possible one-time repository setting:** GitHub Settings > Actions > General > Workflow permissions > Allow GitHub Actions to create and approve pull requests. Organization policy may override workflow permissions. This connection cannot change GitHub administrative settings. No new GitHub App installation, copied private key or duplicate Railway service is needed.
 
-Create an organization GitHub App and install it ONLY on Noetfield-Systems/Proofloom-Genesis.
+## Runtime switch
+Service: proofloom-global-web, source linked to main with the existing persistent PostgreSQL. BRIDGE_REPOSITORY must equal Noetfield-Systems/Proofloom-Genesis. Keep BRIDGE_ENABLED=false until signed Actions OIDC authentication has been observed successfully. QA_ENABLED=false normally. The older BRIDGE_API_KEY and VERIFIER_API_KEY may remain for authenticated external service clients but need not be duplicated in GitHub Actions.
 
-| Repository permission | Level |
-|---|---|
-| Metadata | Read |
-| Contents | Read/write |
-| Issues | Read/write |
-| Pull requests | Read/write |
-| Checks | Read |
-| Actions | Read |
-| Commit statuses | Read |
-| Workflows / Administration | None |
+## State machine
+triage_ready -> leased -> dispatched (GitHub issue) -> implementation_ready (GitHub PR) -> qa_passed (passing PR checks) -> release_reported (deployed merge SHA observed) -> release_verified (separate verifier) -> revalidated / reopened (original contributor).
 
-Set repository Actions secrets: PROOFLOOM_GITHUB_APP_ID, PROOFLOOM_GITHUB_APP_PRIVATE_KEY, PROOFLOOM_BRIDGE_API_KEY, PROOFLOOM_VERIFIER_API_KEY. The bridge and verifier API keys must match the respective existing Railway environment secrets and must be different. These values cannot be recovered from the repository.
+A maximum of three eligible packets is processed per run. Deterministic event IDs prevent duplicated callbacks, and expired leases can be reclaimed without stealing active work. User-submitted text remains untrusted data, never a shell command.
 
-Set repository Actions variables to enable the actual jobs: PROOFLOOM_BRIDGE_RUNNER_ENABLED=true and PROOFLOOM_BRIDGE_VERIFIER_ENABLED=true. Until then, the jobs are skipped. In Railway service proofloom-global-web, ensure BRIDGE_REPOSITORY=Noetfield-Systems/Proofloom-Genesis and only then enable BRIDGE_ENABLED=true. Keep QA_ENABLED=false normally.
+## E2E acceptance
+1. Independent human submits q13 with specific JSON locale/key/text/why.
+2. Operator accepts once; exactly one XP event and WorkPacket exist.
+3. GitHub Actions runner authenticates through OIDC and claims that packet.
+4. WorkPacket-linked issue and single-file PR exist in the allowed repository.
+5. PR's actual head passes syntax-and-contracts; merge SHA is recorded.
+6. Railway succeeds at the same merge SHA; the new localized label renders in production.
+7. Distinct verifier posts a source-linked Actions receipt; PR CI evidence is preserved separately.
+8. Original contributor revalidates or reopens.
 
-No new Railway database, Web service, Company OS or user table should be created.
+Public activity is the actual database-backed /activity page. Personal timelines live at /work/:id, available only to the source contributor. /api/v1/status reports Railway deployment_sha when available.
 
-## Process
+## Failure recovery
+Set BRIDGE_ENABLED=false to suspend new dispatch without shutting down the public site. Expired leases are re-claimable. Failed PR checks, fake evidence, mismatched deployment SHA or unverified receipt must never advance release_verified. A rollback does not rewrite historical evidence.
 
-1. Genuine human submits q13; operator accepts once; one WorkPacket and one XP event are persisted.
-2. Bridge workflow uses a short-lived repository-scoped GitHub App token, leases eligible work for eight minutes, and enforces fixed locale/key/path restrictions.
-3. Runner creates a GitHub issue referencing the WorkPacket, deterministic branch and single-file PR. Payload is treated as untrusted data, not runnable instructions.
-4. Actual PR checks pass on the precise PR revision. Reviewed q13 changes may be auto-squash-merged when the fixed pilot auto-merge option is enabled; other missions are not dispatched.
-5. Railway auto-deploys the merge commit. Runner observes the deployed SHA via the live API plus the live translated label before reporting release.
-6. Separate verifier workflow with a different key re-reads GitHub PR, check runs, merged locale data, and live revision/content. Only then posts release verification with its GitHub Actions run receipt.
-7. Original contributor separately revalidates or reopens the result.
-
-The verifier is logically and credential-separated, but its implementation lives in the same source repo; do not claim full organizational independence.
-
-## Acceptance and negative cases
-
-A real end-to-end proof requires real submission ID; accepted WorkPacket UUID; GitHub issue; scoped PR; passing PR check; merged commit; SUCCESS Railway deploy of that same SHA; live behavior assertion; verifier run URL; original contributor revalidation. Test rejection for wrong project/repo, unsupported locale/key, HTML injection, non-JSON submissions, duplicate rewards, concurrent/expired leases, failing CI, unmerged changes, mismatched deployment SHA, fake receipt URL and wrong-owner revalidation.
-
-## Recovery and known remaining limitations
-
-Stop new work with repository variable PROOFLOOM_BRIDGE_RUNNER_ENABLED=false, and set Railway BRIDGE_ENABLED=false to reject new leases/events. The queue and GitHub evidence remain available; stale leases expire. Do not force-push or backfill fabricated verifier receipts.
-
-Still not evidenced: installing an actual GitHub App, configuring repository secret values and variables, protecting main with required checks, enabling Railway check-suite gating, a real q13 submission, an App-created PR, and a real independent released-change receipt.
-
-Production revision proof depends on Railway exposing RAILWAY_GIT_COMMIT_SHA at runtime; a null deployment_sha must be treated as a failure of the release check rather than replaced with an assumed value.
+## Truth boundary
+Merged source files and green CI do not prove a genuine submission-driven PR lifecycle. Main branch protection and GitHub Actions' PR-creation authorization are repository settings and must be verified independently. Never invent contributors, merged PRs, funds or verification receipts.
