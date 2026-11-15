@@ -21,7 +21,7 @@ test('bridge cannot lease unconfigured repository',()=>{
  assert.match(source,/BRIDGE_ENABLED!=='true'/);
  assert.match(source,/!bridgeRepository\(\)/);
  assert.match(source,/error:'bridge_not_configured'/);
- assert.match(source,/status='triage_ready' RETURNING/);
+ assert.match(source,/lease_expires_at/); assert.match(source,/status='triage_ready'/);
 });
 test('agent and verifier credentials are distinct',()=>{
  assert.match(source,/role==='verifier'\?Bun.env.VERIFIER_API_KEY:Bun.env.BRIDGE_API_KEY/);
