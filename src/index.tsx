@@ -26,7 +26,7 @@ const seeds:[string,string,string,string,number,string,string][] = [
 ['q09','Create a review rubric','Learning','Intermediate',90,'Design a checklist that distinguishes actionable bug reports from vague feedback.','Five criteria with passing and failing examples.'],
 ['q10','GitHub-ready improvement','Vibe Coding','Advanced',160,'Implement a small improvement and link a public, authorized PR or diff.','Repository or PR URL, change explanation and test evidence.'],
 ['q11','Design a sponsor brief','Design','Intermediate',85,'Make funded missions intelligible before any builder accepts work.','A brief with scope, output, rubric and accurate funding status.'],
-['q12','Find a measurable performance issue','Bug Hunter','Advanced',125,'Inspect a public Proofloom page for a repeatable loading bottleneck.','Test environment, performance evidence and a scoped change.']
+['q12','Find a measurable performance issue','Bug Hunter','Advanced',125,'Inspect a public Proofloom page for a repeatable loading bottleneck.','Test environment, performance evidence and a scoped change.'],
 ['q13','Improve a real interface translation','Feedback','Beginner',75,'Suggest a precise existing interface label translation. Submit JSON with locale, key, text and why. Approved changes can become scoped GitHub pull requests.','JSON: {"locale":"fa","key":"Missions","text":"ماموریت‌ها","why":"Explain why this is clearer."}. Supported keys are common navigation labels. Acceptance is not a released change.'],
 ];
 async function initialize(){
