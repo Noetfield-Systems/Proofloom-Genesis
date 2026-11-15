@@ -27,6 +27,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Validate signed GitHub OIDC runner identity
+        run: node scripts/oidc-diagnostic.mjs agent
       - name: Dispatch and reconcile bounded translation WorkPackets
         env:
           GITHUB_TOKEN: ${{ github.token }}
