@@ -21,3 +21,7 @@ A real independent payment destination, funded sponsor mission agreement, paymen
 
 ## P3 Community / token economy — ROADMAP
 Human+AI team workspace, advanced prompt-to-diff preview, Academy progression, time-bounded Genesis campaigns, external sponsor ecosystem, optional EVM chain decision, audited distribution and public treasury/claim data only when live.
+
+## v0.5 implementation progress
+
+Source implementation adds premium landing/navigation/profile UI, searchable missions, authenticated Studio form, public activity, localized copy and workload-authenticated Actions runner/verifier without copied GitHub App secrets. **Only a live, user-originated WorkPacket-to-PR-to-verified-release receipt proves the remaining end-to-end acceptance.** Railway enablement, GitHub Actions PR-creation permission and an actual eligible contribution must be observed, not inferred from repository code.
