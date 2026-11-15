@@ -12,7 +12,7 @@ An **independent global human × AI builder contribution economy**. Genesis v0.3
 
 ## Working v0.3 functionality
 
-- Responsive public pages: home, 12 real self-contained Genesis quests, Vibe Studio entry, Academy, Community, Rewards, Opportunities, Whitepaper, Sponsors, Privacy, Terms.
+- Responsive public pages: home, 13 self-contained Genesis missions including a reviewed translation pilot, Vibe Studio entry, Academy, Community, Rewards, Opportunities, Whitepaper, Sponsors, Privacy, Terms.
 - Email/password registration, durable sessions, authenticated profiles and evidence-backed mission submissions.
 - Review panel with short-lived secure operator session. Decision and nontransferable XP are recorded in PostgreSQL transactions with unique reward events.
 - Qualified referral XP only after a first accepted contribution; proof-of-work pages for accepted submissions.
@@ -58,6 +58,12 @@ The repository-ready package includes `.github/workflows/ci.yml` and two SQL mig
 
 ## Remaining external integration boundaries
 
-The GitHub repository `Noetfield-Systems/Proofloom-Genesis` is created and deployed as the source of `proofloom-global-web`. The separate GitHub App for contributor PRs is not yet integrated. GitHub App, paid bounty checkout, EVM issuance, genuine independent QA receipts and a real first shipped change remain separate, unverified work. Proofloom must not merge its user data, token liabilities or treasury into Noetfield, ARQANT, BuildRelay, WorkforceOS, SignalForge, Cairn or Earnloop.
+The GitHub repository `Noetfield-Systems/Proofloom-Genesis` is created and deployed as the source of `proofloom-global-web`. The bounded GitHub App adapter and independently credentialed verifier workflows are implemented but remain disabled until the GitHub App, Actions credentials and repository variables are provisioned. GitHub App, paid bounty checkout, EVM issuance, genuine independent QA receipts and a real first shipped change remain separate, unverified work. Proofloom must not merge its user data, token liabilities or treasury into Noetfield, ARQANT, BuildRelay, WorkforceOS, SignalForge, Cairn or Earnloop.
 
 Start with [Bridge API v0.2](docs/BRIDGE_API_v0.2.md), [QA report](docs/QA_AND_ACCEPTANCE.md), and [Founder Mandate](docs/FOUNDER_MANDATE_v1.txt).
+
+## Genesis v0.4 — contributor execution pilot and polished UI
+
+The responsive interface now has enhanced contrast, keyboard focus and mobile layout; a contributor WorkPacket timeline shows exact recorded events. Mission q13 accepts bounded JSON localization changes with human review, a repo-scoped GitHub App issue/PR runner, and a separately credentialed released-change verifier. All nine published non-English languages include the new mission and timeline labels. The source tests and CI enforce localization coverage and release-evidence invariants.
+
+**Actual activation status:** GitHub App installation/secrets, bridge enablement and a genuine user-originated verified release are not evidenced. Workflows are opt-in; do not interpret code presence as operational dispatch. Follow [Bridge pilot operations](docs/BRIDGE_PILOT_OPERATIONS.md). The existing source-linked Railway Web and PostgreSQL remain authoritative.

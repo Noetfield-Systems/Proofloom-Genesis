@@ -23,3 +23,7 @@ Set `DATABASE_URL=${{Postgres.DATABASE_URL}}`, `NODE_ENV=production`, `PORT=3000
 ## Contribution lifecycle
 
 `/operator` → short-lived privileged review session → accept/reject with rationale. Accepted work awards XP transactionally, creating a triage-ready WorkPacket reference. Agent dispatch and verified merge remain separate from review acceptance. Enrollment requires no wallet. Token payouts and paid bounties are not live.
+
+## v0.4 GitHub execution and UI extension
+
+PR implementation adds a scoped q13 translation mission, a contributor-readable development timeline, expiring WorkPacket leases and server-side GitHub evidence validation. GitHub Actions runner/verifier are opt-in and remain disabled without a repository-scoped App, configured Actions secrets, and enabling variables. The API reports deployment_sha from Railway source revision metadata when available; a missing SHA cannot prove a release. Runbook and exact test gates: [BRIDGE_PILOT_OPERATIONS.md](BRIDGE_PILOT_OPERATIONS.md). No live autonomous PR or verified release should be claimed from the initial code merge alone.

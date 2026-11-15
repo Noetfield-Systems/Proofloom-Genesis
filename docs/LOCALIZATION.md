@@ -22,3 +22,7 @@ Current complete dictionaries: **English, Persian, Arabic, Spanish, French, Germ
 ## Live verification
 
 `POST /__i18n_smoke` checks 60 page/locale combinations (10 languages × six routes) for HTTP 200, language direction, selected-language selector state, and visible localized headings. It does not create users or modify financial records. For additional languages, add an editorially reviewed glossary; do not silently fall back to a partially English interface.
+
+## v0.4 addition
+
+All nine published non-English dictionaries include the new q13 mission title/brief/deliverable and contributor WorkPacket evidence/timeline strings. The enforced canonical key set grows from 354 to 379 keys per language; the locale parity test must pass before release.

@@ -13,3 +13,7 @@ Install an authorized GitHub App for this one repository, map the installation t
 Prove: accepted user submission → persisted WorkPacket → assigned execution → GitHub issue/PR → tests → merge → independently verified release → original user revalidation. No completed PR/release or financial result should be claimed until independently evidenced.
 
 Never commit DATABASE_URL, reviewer/bridge/verifier secrets, user data, or production DB snapshots.
+
+## v0.4 bounded execution update
+
+The repo now contains bridge-runner.yml and release-verify.yml, with a dedicated q13 translation pilot, structured WorkPacket lease recovery and user-visible timeline. Both schedules are gated by separate repository variables. They do not prove a GitHub App is installed or a real issue/PR/release was produced. The acceptance and setup checklist is in BRIDGE_PILOT_OPERATIONS.md.

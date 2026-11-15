@@ -11,11 +11,11 @@ const enRequired = [
 ];
 const published=['fa','ar','es','fr','de','pt-BR','ru','zh-CN','hi'];
 for (const lang of published) {
- test(`${lang}: 12 mission titles, descriptions and deliverables translated`,()=>{
+ test(`${lang}: 13 mission titles, descriptions and deliverables translated`,()=>{
    const translations=JSON.parse(readFileSync(new URL(`../locales/${lang}.json`,import.meta.url),'utf8'));
    const source=readFileSync(new URL('../src/index.tsx',import.meta.url),'utf8');
    const rows=Array.from(source.matchAll(/\['q\d\d','((?:[^'\\]|\\.)*)','[^']+','[^']+',\d+,'((?:[^'\\]|\\.)*)','((?:[^'\\]|\\.)*)'\]/g));
-   assert.equal(rows.length,12);
+   assert.equal(rows.length,13);
    for(const row of rows) for(const key of row.slice(1)) assert.ok(translations[key],`${lang} missing ${key}`);
  });
  test(`${lang}: all critical conversion, account, and disclosure copy translated`,()=>{
@@ -32,10 +32,10 @@ test('Language selection is persisted and RTL languages identified',()=>{
 
 const canonical=JSON.parse(readFileSync(new URL('../locales/fa.json',import.meta.url),'utf8'));
 for (const lang of published) {
- test(`${lang}: all 354 platform strings have identical source keys`,()=>{
+ test(`${lang}: all 379 platform strings have identical source keys`,()=>{
   const actual=JSON.parse(readFileSync(new URL(`../locales/${lang}.json`,import.meta.url),'utf8'));
   assert.deepEqual(Object.keys(actual).sort(),Object.keys(canonical).sort());
-  assert.ok(Object.keys(actual).length>=350);
+  assert.ok(Object.keys(actual).length>=379);
   for(const [key,value] of Object.entries(actual)){assert.ok(value.trim().length>0,lang+' empty '+key);assert.ok(!/^\{.*\}$/.test(value),lang+' template placeholder '+key)}
  });
 }

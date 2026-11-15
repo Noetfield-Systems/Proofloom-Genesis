@@ -23,7 +23,7 @@ The E2E run initially detected a `__Host-` cookie deletion error and produced HT
 | Mandate | Status |
 |---|---|
 | Actual autonomous coding / issue triage with AI | Not connected; persistent Bridge API supports the adapter contract |
-| GitHub pull request, checked/merged code | Not done; GitHub repository absent |
+| GitHub pull request, checked/merged code | Not done; GitHub source repository exists; contributor-initiated App PR and verified release still not demonstrated |
 | Independent release QA and user revalidation | Routes and state machine built; no actual verified release receipt |
 | Project isolation under multiple real external tenants | Not proven; one Proofloom self project |
 | Paid sponsor transaction and net-positive contribution margin | No checkout or payments connected |
@@ -32,4 +32,8 @@ The E2E run initially detected a `__Host-` cookie deletion error and produced HT
 
 ## Verification caution
 
-Actual browser screenshots, accessibility audits, email confirmation/reset, payment reconciliation and GitHub-sourced CI runs remain outstanding. The QA code is opt-in and disabled after testing.
+Actual browser screenshots, accessibility audits, email confirmation/reset, payment reconciliation and GitHub source CI runs now exist; a real contributor-originated checked PR remains outstanding. The QA code is opt-in and disabled after testing.
+
+## Genesis v0.4 implementation evidence
+
+GitHub PR #1 adds a bounded translation-to-PR pilot, explicit lease recovery, separately credentialed release verification and a contributor evidence timeline. The repository CI must pass after these changes. **No real end-to-end contributor execution claim is justified by this implementation PR.** A successful PR merge and Railway deploy of the implementation code are distinct from a genuine user-sourced task releasing through the automated bridge.
