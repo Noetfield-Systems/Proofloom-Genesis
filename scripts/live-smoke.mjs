@@ -48,7 +48,7 @@ if(ready){
  const missionFilter=await request('/missions?category=Feedback&search=translation&difficulty=Beginner');
  record('searchable_missions',missionFilter.status===200&&missionFilter.raw.includes('Improve a real interface translation')&&!missionFilter.raw.includes('Make the first minute clearer'),'HTTP '+missionFilter.status);
  const studio=await request('/studio');
- record('studio_real_submission',studio.status===200&&studio.raw.includes('Turn your prompt into real work.')&&studio.raw.includes('action=\"/submit\"'),'HTTP '+studio.status);
+ record('studio_real_submission',studio.status===200&&studio.raw.includes('Turn your prompt into real work.')&&studio.raw.includes('Join to start writing'),'HTTP '+studio.status);
  const premium=await request('/');
  record('premium_design',premium.status===200&&premium.raw.includes('PROOFLOOM / GENESIS NETWORK')&&premium.raw.includes('feature-row'),'HTTP '+premium.status);
  const db=await request('/__smoke',{method:'POST'});
