@@ -6,6 +6,7 @@ import { createHash, timingSafeEqual } from 'node:crypto';
 import { localizeHtml, localizePlain, selectLocale } from './i18n';
 import { translations } from './translations';
 import { PREMIUM_CSS } from './premium';
+import { verifyActionsJwt } from '../scripts/actions-identity.mjs';
 
 const app = new Hono();
 const sql = postgres(Bun.env.DATABASE_URL || 'postgres://unconfigured', {max:5,connect_timeout:7,ssl:false});
@@ -69,10 +70,11 @@ async function allowed(c:any,action:string,limit:number,period:number){const ip=
 function sameOrigin(c:any){const origin=c.req.header('origin');if(!origin)return true;try{return new URL(origin).host===new URL(c.req.url).host}catch{return false}}
 function httpsLink(s:string){if(!s)return true;try{return new URL(s).protocol==='https:'}catch{return false}}
 function adminKey(s:string){const secret=Bun.env.OPERATOR_REVIEW_KEY||'';return secret.length>=32&&secret.length===s.length&&timingSafeEqual(Buffer.from(secret),Buffer.from(s));}
-function bridgeAuth(c:any,role:'agent'|'verifier'='agent'){
+async function bridgeAuth(c:any,role:'agent'|'verifier'='agent'){
  const secret=role==='verifier'?Bun.env.VERIFIER_API_KEY:Bun.env.BRIDGE_API_KEY;
  const supplied=(c.req.header('authorization')||'').replace(/^Bearer\s+/i,'');
- return typeof secret==='string'&&secret.length>=32&&supplied.length===secret.length&&timingSafeEqual(Buffer.from(supplied),Buffer.from(secret));
+ if(typeof secret==='string'&&secret.length>=32&&supplied.length===secret.length&&timingSafeEqual(Buffer.from(supplied),Buffer.from(secret)))return true;
+ return await verifyActionsJwt(supplied,role);
 }
 const OPER_COOKIE='__Host-proofloom-operator';
 async function operatorSession(c:any){const token=getCookie(c,OPER_COOKIE);if(!token)return false;const rows=await sql`SELECT token_hash FROM operator_sessions WHERE token_hash=${digest(token)} AND expires_at>now() LIMIT 1`;return rows.length>0;}
@@ -311,10 +313,10 @@ app.post('/revalidate',async c=>{if(!sameOrigin(c))return c.text('Forbidden',403
  if(result.error)return c.text(result.error,result.code);return c.redirect('/profile?notice='+qp('Release feedback recorded. Thank you.'));
 });
 // Authenticated human/agent bridge. No code is executed and no third-party repository is modified by these endpoints.
-app.get('/api/v1/bridge/queue',async c=>{if(!bridgeAuth(c))return c.json({error:'unauthorized'},401);
+app.get('/api/v1/bridge/queue',async c=>{if(!await bridgeAuth(c)return c.json({error:'unauthorized'},401);
  const rows=await sql`SELECT w.id,w.project_id,w.status,w.repository,w.created_at,w.artifact_url,w.qa_evidence_url,w.release_url,w.lease_owner,w.lease_expires_at,s.id AS submission_id,s.mission_id,s.body,s.evidence_url,m.title,m.brief,m.deliverable FROM workpackets w JOIN submissions s ON s.id=w.submission_id JOIN missions m ON m.id=s.mission_id WHERE w.status IN ('triage_ready','leased','dispatched','implementation_ready','qa_passed') ORDER BY w.created_at LIMIT 100`;
  return c.json({items:rows,execution_enabled:Bun.env.BRIDGE_ENABLED==='true'&&!!bridgeRepository(),allowed_repository:bridgeRepository()});});
-app.post('/api/v1/bridge/lease',async c=>{if(!bridgeAuth(c))return c.json({error:'unauthorized'},401);
+app.post('/api/v1/bridge/lease',async c=>{if(!await bridgeAuth(c)return c.json({error:'unauthorized'},401);
  if(Bun.env.BRIDGE_ENABLED!=='true'||!bridgeRepository())return c.json({error:'bridge_not_configured'},409);
  const b=await c.req.json().catch(()=>({})),id=esc(b.workpacket_id),runner=esc(b.runner_id);if(!/^[0-9a-f-]{36}$/.test(id)||!(/^[A-Za-z0-9._-]{1,100}$/.test(runner)))return c.json({error:'invalid_lease_request'},400);
  const repository=bridgeRepository()!;
@@ -327,7 +329,7 @@ app.post('/api/v1/bridge/lease',async c=>{if(!bridgeAuth(c))return c.json({error
  if(!ok)return c.json({error:'not_leaseable'},409);
  return c.json({id,repository,status:'leased',lease_owner:runner,authorization:'lease_only_no_execution_claim'});
 });
-app.post('/api/v1/bridge/event',async c=>{if(!bridgeAuth(c))return c.json({error:'unauthorized'},401);if(Bun.env.BRIDGE_ENABLED!=='true')return c.json({error:'bridge_disabled'},409);
+app.post('/api/v1/bridge/event',async c=>{if(!await bridgeAuth(c)return c.json({error:'unauthorized'},401);if(Bun.env.BRIDGE_ENABLED!=='true')return c.json({error:'bridge_disabled'},409);
  const b=await c.req.json().catch(()=>({}));const id=esc(b.workpacket_id),type=esc(b.event_type),evidence=esc(b.evidence_url),eventId=esc(b.event_id);
  const transitions:{[key:string]:[string,string]}={'workpacket.dispatched':['leased','dispatched'],'implementation.ready':['dispatched','implementation_ready'],'qa.completed':['implementation_ready','qa_passed'],'release.reported':['qa_passed','release_reported']};
  if(!transitions[type]||!/^[-0-9a-f]{36}$/.test(id)||!/^[-0-9a-f]{36}$/.test(eventId)||!evidence||evidence.length>700||!httpsLink(evidence))return c.json({error:'invalid_event'},400);
@@ -341,11 +343,11 @@ app.post('/api/v1/bridge/event',async c=>{if(!bridgeAuth(c))return c.json({error
 });
 // Separate verifier role: release reported is NOT verified without an independent receipt.
 app.get('/api/v1/bridge/verify-queue',async c=>{
- if(!bridgeAuth(c,'verifier'))return c.json({error:'unauthorized'},401);
+ if(!await bridgeAuth(c,'verifier')return c.json({error:'unauthorized'},401);
  const rows=await sql`SELECT w.id,w.project_id,w.status,w.repository,w.release_url,s.id AS submission_id,s.mission_id,s.body FROM workpackets w JOIN submissions s ON s.id=w.submission_id WHERE w.status='release_reported' ORDER BY w.updated_at LIMIT 50`;
  return c.json({items:rows});
 });
-app.post('/api/v1/bridge/verify-release',async c=>{if(!bridgeAuth(c,'verifier'))return c.json({error:'unauthorized'},401);
+app.post('/api/v1/bridge/verify-release',async c=>{if(!await bridgeAuth(c,'verifier')return c.json({error:'unauthorized'},401);
  const b=await c.req.json().catch(()=>({})),id=esc(b.workpacket_id),evidence=esc(b.receipt_url),eventId=esc(b.event_id);
  if(!/^[-0-9a-f]{36}$/.test(id)||!/^[-0-9a-f]{36}$/.test(eventId)||!/^https:\/\/github\.com\/Noetfield-Systems\/Proofloom-Genesis\/actions\/runs\/\d+$/.test(evidence)||evidence.length>700)return c.json({error:'invalid_receipt'},400);
  const result=await sql.begin(async tx=>{const rs=await tx`SELECT id,project_id,submission_id,status FROM workpackets WHERE id=${id} FOR UPDATE`;if(!rs.length)return {error:'not_found',http:404};const x=rs[0];const prior=await tx`SELECT workpacket_id,event_type FROM bridge_events WHERE idempotency_key=${eventId}`;if(prior.length){if(prior[0].workpacket_id!==id||prior[0].event_type!=='release.verified')return {error:'idempotency_conflict',http:409};return {status:x.status,idempotent:true};}if(x.status!=='release_reported')return {error:'requires_release_report',http:409};
@@ -353,7 +355,7 @@ app.post('/api/v1/bridge/verify-release',async c=>{if(!bridgeAuth(c,'verifier'))
  await bridgeEvent(tx,x.submission_id,id,x.project_id,'release.verified',eventId,evidence,'independent_verifier');return {status:'release_verified'};});
  if(result.error)return c.json(result,result.http||409);return c.json(result);
 });
-app.get('/api/v1/bridge/events/:workpacket_id',async c=>{if(!bridgeAuth(c))return c.json({error:'unauthorized'},401);
+app.get('/api/v1/bridge/events/:workpacket_id',async c=>{if(!await bridgeAuth(c)return c.json({error:'unauthorized'},401);
  const id=c.req.param('workpacket_id');const rows=await sql`SELECT id,event_type,evidence_url,source,created_at FROM bridge_events WHERE workpacket_id=${id} ORDER BY created_at`;
  return c.json({items:rows});});
 app.get('/api/v1/bridge/status',async c=>{const rows=await sql`SELECT status,count(*)::int AS count FROM workpackets GROUP BY status ORDER BY status`;
