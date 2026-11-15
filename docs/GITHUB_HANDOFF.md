@@ -17,3 +17,7 @@ Never commit DATABASE_URL, reviewer/bridge/verifier secrets, user data, or produ
 ## v0.4 bounded execution update
 
 The repo now contains bridge-runner.yml and release-verify.yml, with a dedicated q13 translation pilot, structured WorkPacket lease recovery and user-visible timeline. Both schedules are gated by separate repository variables. They do not prove a GitHub App is installed or a real issue/PR/release was produced. The acceptance and setup checklist is in BRIDGE_PILOT_OPERATIONS.md.
+
+## v0.5 — Native Actions identity and premium web
+
+The bounded runner and separate verifier now use GitHub's signed OIDC workload identity and ephemeral repository GITHUB_TOKEN. Permanent GitHub App credentials are no longer a prerequisite for this pilot code path. The repository may still need its Actions setting permitting PR creation; this is a repo-admin switch, not proof of an authenticated user submission. The live-release smoke now checks new UX routes and exact deployed SHA. See BRIDGE_PILOT_OPERATIONS.md.
