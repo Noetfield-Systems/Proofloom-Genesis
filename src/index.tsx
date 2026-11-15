@@ -77,6 +77,34 @@ const OPER_COOKIE='__Host-proofloom-operator';
 async function operatorSession(c:any){const token=getCookie(c,OPER_COOKIE);if(!token)return false;const rows=await sql`SELECT token_hash FROM operator_sessions WHERE token_hash=${digest(token)} AND expires_at>now() LIMIT 1`;return rows.length>0;}
 async function operatorAllowed(c:any,key?:string){return await operatorSession(c)||(key!==undefined&&adminKey(key));}
 function bridgeRepository(){const r=(Bun.env.BRIDGE_REPOSITORY||'').trim();return /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(r)?r:null;}
+// Verify GitHub evidence server-side before a runner may advance a WorkPacket.
+// GitHub API addresses are constructed from our single allowed repository, never from user URLs.
+async function verifiedGitHubEvidence(workpacketId:string,type:string,url:string,packet:any){
+ const repo=bridgeRepository();if(repo!=='Noetfield-Systems/Proofloom-Genesis'||packet.repository!==repo)return false;
+ const prefix='https://github.com/'+repo;
+ async function get(path:string){const r=await fetch('https://api.github.com/repos/'+repo+path,{headers:{Accept:'application/vnd.github+json','User-Agent':'proofloom-bridge/0.4'},signal:AbortSignal.timeout(8000)});if(!r.ok)throw Error('github_evidence_http_'+r.status);return r.json();}
+ const exact=(pattern:RegExp)=>pattern.exec(url);
+ if(type==='workpacket.dispatched'){
+  const m=exact(new RegExp('^'+prefix.replaceAll('.','\\.')+'/issues/(\\d+)$'));if(!m)return false;
+  const issue=await get('/issues/'+m[1]);return !issue.pull_request&&(issue.body||'').includes('proofloom-workpacket:'+workpacketId);
+ }
+ if(type==='implementation.ready'){
+  const m=exact(new RegExp('^'+prefix.replaceAll('.','\\.')+'/pull/(\\d+)$'));if(!m)return false;
+  const pr=await get('/pulls/'+m[1]);
+  return pr.base?.ref==='main'&&pr.head?.repo?.full_name===repo&&pr.head?.ref==='proofloom/translation-'+workpacketId.replaceAll('-','').slice(0,18)&&(pr.body||'').includes('Source WorkPacket: '+workpacketId);
+ }
+ if(type==='qa.completed'){
+  const m=exact(new RegExp('^'+prefix.replaceAll('.','\\.')+'/pull/(\\d+)/checks$'));if(!m||packet.artifact_url!==prefix+'/pull/'+m[1])return false;
+  const pr=await get('/pulls/'+m[1]);const check=await get('/commits/'+pr.head.sha+'/check-runs?per_page=100');
+  return (check.check_runs||[]).some((x:any)=>x.name==='syntax-and-contracts'&&x.status==='completed'&&x.conclusion==='success');
+ }
+ if(type==='release.reported'){
+  const m=exact(new RegExp('^'+prefix.replaceAll('.','\\.')+'/commit/([0-9a-f]{40})$'));if(!m||!packet.artifact_url||!Bun.env.RAILWAY_GIT_COMMIT_SHA||Bun.env.RAILWAY_GIT_COMMIT_SHA!==m[1])return false;
+  const pm=new RegExp('^'+prefix.replaceAll('.','\\.')+'/pull/(\\d+)$').exec(packet.artifact_url);if(!pm)return false;
+  const pr=await get('/pulls/'+pm[1]);return pr.merged===true&&pr.merge_commit_sha===m[1]&&!!packet.qa_evidence_url;
+ }
+ return false;
+}
 async function bridgeEvent(tx:any,submissionId:string|null,packetId:string|null,projectId:string,eventType:string,idempotency:string,evidence:string|null=null,source='platform'){
  await tx`INSERT INTO bridge_events(id,submission_id,workpacket_id,project_id,event_type,idempotency_key,evidence_url,source) VALUES(${crypto.randomUUID()},${submissionId},${packetId},${projectId},${eventType},${idempotency},${evidence},${source}) ON CONFLICT(idempotency_key) DO NOTHING`;
 }
@@ -268,7 +296,7 @@ app.post('/api/v1/bridge/lease',async c=>{if(!bridgeAuth(c))return c.json({error
  const b=await c.req.json().catch(()=>({})),id=esc(b.workpacket_id),runner=esc(b.runner_id);if(!/^[0-9a-f-]{36}$/.test(id)||!(/^[A-Za-z0-9._-]{1,100}$/.test(runner)))return c.json({error:'invalid_lease_request'},400);
  const repository=bridgeRepository()!;
  const ok=await sql.begin(async tx=>{
-  const changed=await tx`UPDATE workpackets SET status='leased',repository=${repository},lease_owner=${runner},lease_expires_at=now()+interval '8 minutes',updated_at=now() WHERE id=${id} AND (status='triage_ready' OR (status='leased' AND lease_expires_at<now())) RETURNING id,project_id,submission_id`;
+  const changed=await tx`UPDATE workpackets SET status='leased',repository=${repository},lease_owner=${runner},lease_expires_at=now()+interval '8 minutes',updated_at=now() WHERE id=${id} AND (status='triage_ready' OR (status='leased' AND (lease_expires_at<now() OR lease_expires_at IS NULL))) RETURNING id,project_id,submission_id`;
   if(!changed.length)return false;
   await bridgeEvent(tx,changed[0].submission_id,id,changed[0].project_id,'workpacket.leased','leased:'+id);
   return true;
@@ -276,17 +304,17 @@ app.post('/api/v1/bridge/lease',async c=>{if(!bridgeAuth(c))return c.json({error
  if(!ok)return c.json({error:'not_leaseable'},409);
  return c.json({id,repository,status:'leased',lease_owner:runner,authorization:'lease_only_no_execution_claim'});
 });
-app.post('/api/v1/bridge/event',async c=>{if(!bridgeAuth(c))return c.json({error:'unauthorized'},401);
+app.post('/api/v1/bridge/event',async c=>{if(!bridgeAuth(c))return c.json({error:'unauthorized'},401);if(Bun.env.BRIDGE_ENABLED!=='true')return c.json({error:'bridge_disabled'},409);
  const b=await c.req.json().catch(()=>({}));const id=esc(b.workpacket_id),type=esc(b.event_type),evidence=esc(b.evidence_url),eventId=esc(b.event_id);
  const transitions:{[key:string]:[string,string]}={'workpacket.dispatched':['leased','dispatched'],'implementation.ready':['dispatched','implementation_ready'],'qa.completed':['implementation_ready','qa_passed'],'release.reported':['qa_passed','release_reported']};
  if(!transitions[type]||!/^[-0-9a-f]{36}$/.test(id)||!/^[-0-9a-f]{36}$/.test(eventId)||!evidence||evidence.length>700||!httpsLink(evidence))return c.json({error:'invalid_event'},400);
- const [from,to]=transitions[type];try{const outcome=await sql.begin(async tx=>{const record=await tx`SELECT id,project_id,submission_id,status FROM workpackets WHERE id=${id} FOR UPDATE`;
+ const [from,to]=transitions[type];try{const evidencePacket=(await sql`SELECT id,repository,artifact_url,qa_evidence_url,status FROM workpackets WHERE id=${id} LIMIT 1`)[0];if(!evidencePacket)return c.json({error:'not_found'},404);if(evidencePacket.status===from && !await verifiedGitHubEvidence(id,type,evidence,evidencePacket))return c.json({error:'unverified_github_evidence'},409);const outcome=await sql.begin(async tx=>{const record=await tx`SELECT id,project_id,submission_id,status FROM workpackets WHERE id=${id} FOR UPDATE`;
  if(!record.length)return {error:'not_found',http:404};const x=record[0];const prior=await tx`SELECT workpacket_id,event_type FROM bridge_events WHERE idempotency_key=${eventId} LIMIT 1`;
  if(prior.length){if(prior[0].workpacket_id!==id||prior[0].event_type!==type)return {error:'idempotency_conflict',http:409};return {status:x.status,idempotent:true};}if(x.status!==from)return {error:'invalid_transition',http:409,current:x.status};
  await tx`UPDATE workpackets SET status=${to},artifact_url=CASE WHEN ${type}='implementation.ready' THEN ${evidence} ELSE artifact_url END,qa_evidence_url=CASE WHEN ${type}='qa.completed' THEN ${evidence} ELSE qa_evidence_url END,release_url=CASE WHEN ${type}='release.reported' THEN ${evidence} ELSE release_url END,updated_at=now() WHERE id=${id}`;
  await bridgeEvent(tx,x.submission_id,id,x.project_id,type,eventId,evidence,'authorized_agent');return {status:to,idempotent:false};});
  if(outcome.error)return c.json(outcome,outcome.http||409);return c.json(outcome);
- }catch(e:any){return c.json({error:'event_conflict'},409)}
+ }catch(e:any){console.error('bridge_evidence_validation',e?.message||'error');return c.json({error:'github_evidence_unavailable'},502)}
 });
 // Separate verifier role: release reported is NOT verified without an independent receipt.
 app.get('/api/v1/bridge/verify-queue',async c=>{
@@ -296,7 +324,7 @@ app.get('/api/v1/bridge/verify-queue',async c=>{
 });
 app.post('/api/v1/bridge/verify-release',async c=>{if(!bridgeAuth(c,'verifier'))return c.json({error:'unauthorized'},401);
  const b=await c.req.json().catch(()=>({})),id=esc(b.workpacket_id),evidence=esc(b.receipt_url),eventId=esc(b.event_id);
- if(!/^[-0-9a-f]{36}$/.test(id)||!/^[-0-9a-f]{36}$/.test(eventId)||!evidence||evidence.length>700||!httpsLink(evidence))return c.json({error:'invalid_receipt'},400);
+ if(!/^[-0-9a-f]{36}$/.test(id)||!/^[-0-9a-f]{36}$/.test(eventId)||!/^https:\/\/github\.com\/Noetfield-Systems\/Proofloom-Genesis\/actions\/runs\/\d+$/.test(evidence)||evidence.length>700)return c.json({error:'invalid_receipt'},400);
  const result=await sql.begin(async tx=>{const rs=await tx`SELECT id,project_id,submission_id,status FROM workpackets WHERE id=${id} FOR UPDATE`;if(!rs.length)return {error:'not_found',http:404};const x=rs[0];const prior=await tx`SELECT workpacket_id,event_type FROM bridge_events WHERE idempotency_key=${eventId}`;if(prior.length){if(prior[0].workpacket_id!==id||prior[0].event_type!=='release.verified')return {error:'idempotency_conflict',http:409};return {status:x.status,idempotent:true};}if(x.status!=='release_reported')return {error:'requires_release_report',http:409};
  await tx`UPDATE workpackets SET status='release_verified',qa_evidence_url=${evidence},updated_at=now() WHERE id=${id}`;
  await bridgeEvent(tx,x.submission_id,id,x.project_id,'release.verified',eventId,evidence,'independent_verifier');return {status:'release_verified'};});
