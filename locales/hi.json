@@ -399,5 +399,12 @@
   "Your proposed improvement": "आपका सुझाया सुधार",
   "Join to start writing ↗": "लिखना शुरू करने के लिए जुड़ें ↗",
   "Genesis profile": "जेनेसिस प्रोफ़ाइल",
-  "How your work moves forward": "आपका काम कैसे आगे बढ़ता है"
+  "How your work moves forward": "आपका काम कैसे आगे बढ़ता है",
+  "Activity": "गतिविधि",
+  "NETWORK ACTIVITY / EVIDENCE FIRST": "नेटवर्क गतिविधि / पहले प्रमाण",
+  "See what has actually happened.": "देखें वास्तव में क्या हुआ है।",
+  "Recorded WorkPacket states.": "दर्ज WorkPacket स्थितियाँ।",
+  "Verified release receipts.": "सत्यापित रिलीज़ के प्रमाण।",
+  "No independently verified release yet.": "अभी कोई स्वतंत्र रूप से सत्यापित रिलीज़ नहीं है।",
+  "Open verification receipt ↗": "सत्यापन प्रमाण खोलें ↗"
 }
