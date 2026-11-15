@@ -3,7 +3,7 @@
  * Executes only accepted q13 localization proposals for this repository.
  * All other WorkPackets remain in triage. Never eval user input or run its commands.
  */
-import { randomUUID } from 'node:crypto';
+import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 
 export const REPOSITORY = 'Noetfield-Systems/Proofloom-Genesis';
@@ -23,6 +23,14 @@ export function parseTranslationProposal(body) {
       /[<>{}\u0000-\u001f]/u.test(x.text)) throw Error('unsafe_translation_text');
   if (typeof x.why!=='string' || x.why.trim().length<12 || x.why.length>700) throw Error('missing_rationale');
   return {locale:x.locale,key:x.key,text:x.text.trim(),why:x.why.trim()};
+}
+export function leaseNeedsRecovery(item, now=Date.now()) {
+  const expires=Date.parse(item?.lease_expires_at||'');
+  return item?.status==='leased' && (!Number.isFinite(expires)||expires<=now);
+}
+export function stableEventId(packetId,type) {
+  const x=createHash('sha256').update(packetId+':'+type).digest('hex');
+  return x.slice(0,8)+'-'+x.slice(8,12)+'-5'+x.slice(13,16)+'-a'+x.slice(17,20)+'-'+x.slice(20,32);
 }
 export function isPilotPacket(x) {
   return x.project_id==='proofloom-lab' && x.mission_id==='q13' &&
@@ -61,7 +69,7 @@ async function platform(path,{method='GET',body}={}) {
 }
 async function event(item,type,url) {
   return platform('/api/v1/bridge/event',{method:'POST',body:{
-    workpacket_id:item.id,event_type:type,event_id:randomUUID(),evidence_url:url
+    workpacket_id:item.id,event_type:type,event_id:stableEventId(item.id,type),evidence_url:url
   }});
 }
 async function findIssue(id) {
@@ -88,9 +96,14 @@ async function processPacket(item) {
   if (item.status==='triage_ready' || item.status==='leased') {
     if (item.status==='triage_ready') {
       const lease=await platform('/api/v1/bridge/lease',{method:'POST',body:{workpacket_id:item.id,runner_id:RUNNER_ID}});
-      if(lease.repository!==REPOSITORY)throw Error('repository_grant_mismatch');
+      if(lease.repository!==REPOSITORY||lease.lease_owner!==RUNNER_ID)throw Error('repository_grant_mismatch');
     } else if(item.lease_owner!==RUNNER_ID) {
-      console.log('LEASE_HELD_BY_OTHER',item.id);return;
+      if (!leaseNeedsRecovery(item)) {
+        console.log('LEASE_HELD_BY_OTHER',item.id);return;
+      }
+      const recovered=await platform('/api/v1/bridge/lease',{method:'POST',body:{workpacket_id:item.id,runner_id:RUNNER_ID}});
+      if(recovered.repository!==REPOSITORY||recovered.lease_owner!==RUNNER_ID)throw Error('lease_recovery_not_authorized');
+      console.log('LEASE_RECOVERED',item.id);
     }
     const file=await translationFile(proposal.locale);
     if(!Object.hasOwn(file.source,proposal.key))throw Error('translation_key_missing_in_current_main');
@@ -173,7 +186,8 @@ export async function main() {
   if(!q.execution_enabled || q.allowed_repository!==REPOSITORY){
     console.log('BRIDGE_DISABLED_OR_REPOSITORY_MISMATCH');return;
   }
-  const work=q.items.filter(isPilotPacket).slice(0,Number(process.env.PROOFLOOM_MAX_PACKETS||3));
+  const limit=Math.max(1,Math.min(3,Number(process.env.PROOFLOOM_MAX_PACKETS||3)||3));
+  const work=q.items.filter(isPilotPacket).slice(0,limit);
   for(const item of work) {
     try {await processPacket(item);}
     catch(e) {console.error('PACKET_BLOCKED',item.id,String(e.message||e));process.exitCode=1;}
