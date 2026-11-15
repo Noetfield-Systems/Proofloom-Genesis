@@ -27,12 +27,13 @@ test('renderer assertion checks actual visible translated string',()=>{
 test('both runtime workflows use separate credentials and opt-in switches',()=>{
   const bridge=readFileSync(new URL('../.github/workflows/bridge-runner.yml',import.meta.url),'utf8');
   const verify=readFileSync(new URL('../.github/workflows/release-verify.yml',import.meta.url),'utf8');
-  assert.match(bridge,/PROOFLOOM_BRIDGE_RUNNER_ENABLED/);
-  assert.match(bridge,/create-github-app-token@v2/);
-  assert.match(bridge,/PROOFLOOM_GITHUB_APP_PRIVATE_KEY/);
+  assert.match(bridge,/id-token: write/);
+  assert.match(bridge,/issues: write/);
+  assert.match(bridge,/pull-requests: write/);
+  assert.match(bridge,/GITHUB_TOKEN/);
   assert.doesNotMatch(bridge,/PROOFLOOM_VERIFIER_API_KEY/);
-  assert.match(verify,/PROOFLOOM_BRIDGE_VERIFIER_ENABLED/);
-  assert.match(verify,/PROOFLOOM_VERIFIER_API_KEY/);
+  assert.match(verify,/id-token: write/);
+  assert.match(verify,/checks: read/);
   assert.doesNotMatch(verify,/PROOFLOOM_BRIDGE_API_KEY/);
 });
 
