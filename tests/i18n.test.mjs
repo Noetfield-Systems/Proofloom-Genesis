@@ -32,10 +32,10 @@ test('Language selection is persisted and RTL languages identified',()=>{
 
 const canonical=JSON.parse(readFileSync(new URL('../locales/fa.json',import.meta.url),'utf8'));
 for (const lang of published) {
- test(`${lang}: all 401 platform strings have identical source keys`,()=>{
+ test(`${lang}: all 408 platform strings have identical source keys`,()=>{
   const actual=JSON.parse(readFileSync(new URL(`../locales/${lang}.json`,import.meta.url),'utf8'));
   assert.deepEqual(Object.keys(actual).sort(),Object.keys(canonical).sort());
-  assert.ok(Object.keys(actual).length>=401);
+  assert.ok(Object.keys(actual).length>=408);
   for(const [key,value] of Object.entries(actual)){assert.ok(value.trim().length>0,lang+' empty '+key);assert.ok(!/^\{.*\}$/.test(value),lang+' template placeholder '+key)}
  });
 }
