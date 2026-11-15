@@ -399,5 +399,12 @@
   "Your proposed improvement": "Votre amélioration proposée",
   "Join to start writing ↗": "Rejoignez-nous pour commencer ↗",
   "Genesis profile": "Profil Genesis",
-  "How your work moves forward": "Le parcours de votre travail"
+  "How your work moves forward": "Le parcours de votre travail",
+  "Activity": "Activité",
+  "NETWORK ACTIVITY / EVIDENCE FIRST": "ACTIVITÉ DU RÉSEAU / PREUVES D'ABORD",
+  "See what has actually happened.": "Découvrez ce qui s'est réellement passé.",
+  "Recorded WorkPacket states.": "États des WorkPackets enregistrés.",
+  "Verified release receipts.": "Justificatifs des mises en production vérifiées.",
+  "No independently verified release yet.": "Aucune mise en production vérifiée indépendamment pour le moment.",
+  "Open verification receipt ↗": "Ouvrir le justificatif de vérification ↗"
 }
