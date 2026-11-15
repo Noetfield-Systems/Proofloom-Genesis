@@ -193,6 +193,7 @@ async function processPacket(item) {
       console.log('AWAITING_RUNTIME_ASSERTION',item.id);return;
     }
     await event(item,'release.reported','https://github.com/'+REPOSITORY+'/commit/'+pr.merge_commit_sha);
+    await github('/repos/'+REPOSITORY+'/actions/workflows/release-verify.yml/dispatches',{method:'POST',body:{ref:'main'}});
     console.log('RELEASE_REPORTED_AWAITING_INDEPENDENT_VERIFIER',item.id);
   }
 }
