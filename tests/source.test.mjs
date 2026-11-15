@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 const src=readFileSync(new URL('../src/index.tsx',import.meta.url),'utf8');
-test('12 starter missions exist',()=>{for(let i=1;i<=12;i++)assert.match(src,new RegExp("'q"+String(i).padStart(2,'0')+"'"))});
+test('13 starter missions exist',()=>{for(let i=1;i<=13;i++)assert.match(src,new RegExp("'q"+String(i).padStart(2,'0')+"'"))});
 test('critical authenticated contribution routes exist',()=>{for(const route of ['/register','/login','/submit','/profile','/operator/review','/proof/:id'])assert.ok(src.includes("'"+route+"'"),route)});
 test('reward events prevent double acceptance',()=>{assert.match(src,/submission_id uuid UNIQUE/);assert.match(src,/status!=='pending'/)});
 test('proof reads accepted contributions only',()=>assert.match(src,/s.status='accepted' LIMIT 1/));
