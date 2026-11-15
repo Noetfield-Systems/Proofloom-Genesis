@@ -399,5 +399,12 @@
   "Your proposed improvement": "التحسين الذي تقترحه",
   "Join to start writing ↗": "انضم لتبدأ الكتابة ↗",
   "Genesis profile": "ملف جينيسيس",
-  "How your work moves forward": "كيف يتقدم عملك"
+  "How your work moves forward": "كيف يتقدم عملك",
+  "Activity": "النشاط",
+  "NETWORK ACTIVITY / EVIDENCE FIRST": "نشاط الشبكة / الأدلة أولًا",
+  "See what has actually happened.": "اطّلع على ما حدث بالفعل.",
+  "Recorded WorkPacket states.": "حالات حزم العمل المسجلة.",
+  "Verified release receipts.": "إيصالات الإصدارات المتحقق منها.",
+  "No independently verified release yet.": "لم يتم التحقق بشكل مستقل من أي إصدار بعد.",
+  "Open verification receipt ↗": "فتح إيصال التحقق ↗"
 }
